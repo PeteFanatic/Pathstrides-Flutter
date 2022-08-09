@@ -28,7 +28,8 @@ class AuthServices {
       "password": password,
     };
     var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'auth/login');
+    // ignore: prefer_interpolation_to_compose_strings
+    var url = Uri.parse(baseURL + 'auth/loginEmployee');
     http.Response response = await http.post(
       url,
       headers: headers,

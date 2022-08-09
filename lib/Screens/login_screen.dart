@@ -1,12 +1,17 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Services/auth_services.dart';
+
 import 'package:pathstrides_mobile/Services/globals.dart';
-import 'package:pathstrides_mobile/rounded_button.dart';
 import 'package:http/http.dart' as http;
 
+import '../rounded_button.dart';
+import 'dashboard_screen.dart';
 import 'home_screen.dart';
+import 'landing_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -24,12 +29,14 @@ class _LoginScreenState extends State<LoginScreen> {
       http.Response response = await AuthServices.login(_email, _password);
       Map responseMap = jsonDecode(response.body);
       if (response.statusCode == 200) {
+        // ignore: use_build_context_synchronously
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => const HomeScreen(),
+              builder: (BuildContext context) => const DashboardScreen(),
             ));
       } else {
+        // ignore: use_build_context_synchronously
         errorSnackBar(context, responseMap.values.first);
       }
     } else {
@@ -40,63 +47,72 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 255, 126, 45),
-          centerTitle: true,
-          elevation: 0,
-          title: const Text(
-            'Login',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              backgroundColor: Color.fromARGB(255, 255, 126, 45),
+        body: Column(
+      verticalDirection: VerticalDirection.down,
+      children: <Widget>[
+        IconButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const LandingScreen()));
+          },
+          padding: const EdgeInsets.only(
+              top: 40.0, left: 0.0, bottom: 0.0, right: 330.0),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: const Color.fromARGB(255, 255, 126, 45),
+            size: 25.0,
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.only(
+              top: 30.0, left: 0.0, bottom: 0.0, right: 0.0),
+          height: 180,
+          width: double.infinity,
+          child: Image.asset(
+            "assets/images/pathstrides-logo-with-text.png",
+            width: 100,
+            height: 100,
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: TextField(
+            decoration: const InputDecoration(
+              hintText: 'Enter email',
+            ),
+            onChanged: (value) {
+              _email = value;
+            },
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: 'Inter-SemiBold',
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                decoration: const InputDecoration(
-                  hintText: 'Enter email',
-                ),
-                onChanged: (value) {
-                  _email = value;
-                },
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Inter-SemiBold',
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              TextField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: 'Enter password',
-                ),
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Inter-SemiBold',
-                ),
-                onChanged: (value) {
-                  _password = value;
-                },
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              RoundedButton(
-                btnText: 'LOG IN',
-                onBtnPressed: () => loginPressed(),
-              )
-            ],
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          child: TextField(
+            obscureText: true,
+            decoration: const InputDecoration(
+              hintText: 'Enter password',
+            ),
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: 'Inter-SemiBold',
+            ),
+            onChanged: (value) {
+              _password = value;
+            },
           ),
-        ));
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        RoundedButton(
+          btnText: 'LOG IN',
+          onBtnPressed: () => loginPressed(),
+        )
+      ],
+    ));
   }
 }

@@ -22,7 +22,7 @@ class RoundedButton extends StatelessWidget {
         child: Text(
           btnText,
           style: const TextStyle(
-              color: Colors.white, fontSize: 14, fontFamily: 'Inter-Regular'),
+              color: Colors.white, fontSize: 18, fontFamily: 'Inter-Bold'),
         ),
       ),
     );

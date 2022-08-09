@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Screens/landing_screen.dart';
+import '../Screens/register_screen.dart';
+import 'Screens/dashboard_screen.dart';
+import 'Screens/home_screen.dart';
+import 'Screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
