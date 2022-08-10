@@ -72,7 +72,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
               // style: ButtonStyle(elevation: MaterialStateProperty(12.0 )),
               style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(180, 50),
+                  minimumSize: const Size(200, 50),
                   backgroundColor: const Color.fromARGB(255, 255, 126, 45),
                   elevation: 12.0,
                   textStyle: const TextStyle(

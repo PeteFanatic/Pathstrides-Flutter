@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Screens/profile_screen.dart';
 import 'package:pathstrides_mobile/Screens/task_screen.dart';
-
+import 'announcement_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
 
@@ -17,6 +17,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   final List<Map<String, dynamic>> _pageDetails = [
     {'page': const HomeScreen(), 'title': ''},
+    {'page': const AnnouncementScreen(), 'title': ' '},
     {'page': const TaskScreen(), 'title': ' '},
     {'page': const NotificationScreen(), 'title': ''},
     {'page': const ProfileScreen(), 'title': ''},
@@ -43,6 +44,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.system_security_update_warning),
             label: '',
           ),
           BottomNavigationBarItem(

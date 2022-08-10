@@ -23,6 +23,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String _email = '';
   String _password = '';
+  bool ishiddenPassword = true;
 
   loginPressed() async {
     if (_email.isNotEmpty && _password.isNotEmpty) {
@@ -44,6 +45,17 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  // void _togglePasswordView() {
+  //   // if (ishiddenPassword == true) {
+  //   //   ishiddenPassword = false;
+  //   // } else {
+  //   //   ishiddenPassword = true;
+  //   // }
+  //   setState(() {
+  //     ishiddenPassword = !ishiddenPassword;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +70,9 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.only(
               top: 40.0, left: 0.0, bottom: 0.0, right: 330.0),
           icon: const Icon(
-            Icons.arrow_back_ios_new,
+            Icons.arrow_circle_left_rounded,
             color: const Color.fromARGB(255, 255, 126, 45),
-            size: 25.0,
+            size: 40.0,
           ),
         ),
         Container(
@@ -79,6 +91,11 @@ class _LoginScreenState extends State<LoginScreen> {
           child: TextField(
             decoration: const InputDecoration(
               hintText: 'Enter email',
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 255, 126, 45),
+                ),
+              ),
             ),
             onChanged: (value) {
               _email = value;
@@ -92,10 +109,26 @@ class _LoginScreenState extends State<LoginScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
           child: TextField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: 'Enter password',
-            ),
+            obscureText: ishiddenPassword,
+            decoration: InputDecoration(
+                hintText: 'Enter password',
+                // ignore: prefer_const_constructors
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 255, 126, 45),
+                  ),
+                ),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      ishiddenPassword = !ishiddenPassword;
+                    });
+                  },
+                  child: Icon(
+                    ishiddenPassword ? Icons.visibility : Icons.visibility_off,
+                    color: const Color.fromARGB(255, 255, 126, 45),
+                  ),
+                )),
             style: const TextStyle(
               fontSize: 16,
               fontFamily: 'Inter-SemiBold',
@@ -109,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
           height: 30,
         ),
         RoundedButton(
-          btnText: 'LOG IN',
+          btnText: 'Log In',
           onBtnPressed: () => loginPressed(),
         )
       ],
