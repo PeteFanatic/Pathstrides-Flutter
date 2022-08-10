@@ -1,10 +1,13 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pathstrides_mobile/Services/get_api.dart';
+import 'package:pathstrides_mobile/Services/task_api.dart';
 
 import '../Services/task_info.dart';
 import '../text_widget.dart';
+import 'home_screen.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
@@ -53,7 +56,10 @@ class _TaskScreenState extends State<TaskScreen> {
                         Icons.arrow_back_ios,
                         color: Color.fromARGB(255, 255, 126, 45),
                       ),
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => const HomeScreen()));
+                      },
                     ),
                     IconButton(
                         padding: EdgeInsets.zero,
@@ -74,7 +80,44 @@ class _TaskScreenState extends State<TaskScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: tasks.map((task) {
-                      return Text(task.task_title);
+                      return Scaffold(
+                        body: FutureBuilder<List>(
+                            future: _getTask(),
+                            builder: ((context, snapshot) {
+                              if (snapshot.data == null) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              } else {
+                                List tasks = snapshot.data!;
+                                return ListView.builder(
+                                  itemCount: tasks.length,
+                                  itemBuilder: (context, index) {
+                                    TaskInfo task = tasks[index];
+
+                                    return Container(
+                                      padding: const EdgeInsets.all(10),
+                                      margin: const EdgeInsets.only(bottom: 10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.orange,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            task.task_title,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontFamily: 'Inter-Black',
+                                                color: Colors.black),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                            })),
+                      );
                     }).toList(),
                   ),
                 ),

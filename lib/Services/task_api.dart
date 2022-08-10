@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class CallApi {
   final String _url = 'http://10.0.2.2:8000/api/';
 
-  getEmployeeTaskData(apiUrl) async {
+  Future getEmployeeTaskData(apiUrl) async {
     http.Response response = await http.get(Uri.parse(_url + apiUrl));
     try {
       if (response.statusCode == 200) {

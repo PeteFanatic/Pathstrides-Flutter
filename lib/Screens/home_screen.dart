@@ -37,7 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.only(top: 30.0, bottom: 0, left: 50),
                 child: ElevatedButton(
                   onPressed: () {
-                    TaskScreen();
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const TaskScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 255, 126, 45),
