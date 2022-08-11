@@ -76,50 +76,39 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
               ),
               // SizedBox(height: 15,),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: tasks.map((task) {
-                      return Scaffold(
-                        body: FutureBuilder<List>(
-                            future: _getTask(),
-                            builder: ((context, snapshot) {
-                              if (snapshot.data == null) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              } else {
-                                List tasks = snapshot.data!;
-                                return ListView.builder(
-                                  itemCount: tasks.length,
-                                  itemBuilder: (context, index) {
-                                    TaskInfo task = tasks[index];
+              Container(
+                child: Column(
+                  children: tasks.map((task) {
+                    return Scaffold(
+                        body: Container(
+                      child: FutureBuilder<List>(
+                          future: _getTask(),
+                          builder:
+                              ((BuildContext context, AsyncSnapshot snapshot) {
+                            print(snapshot.data);
+                            if (snapshot.data == null) {
+                              return Center(child: CircularProgressIndicator());
+                            } else {
+                              // List tasks = snapshot.data!;
+                              return ListView.builder(
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, task_id) {
+                                  // TaskInfo task = tasks[index];
 
-                                    return Container(
-                                      padding: const EdgeInsets.all(10),
-                                      margin: const EdgeInsets.only(bottom: 10),
-                                      decoration: BoxDecoration(
-                                        color: Colors.orange,
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            task.task_title,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontFamily: 'Inter-Black',
-                                                color: Colors.black),
-                                          )
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                );
-                              }
-                            })),
-                      );
-                    }).toList(),
-                  ),
+                                  return ListTile(
+                                    leading: TextWidget(
+                                      text: task.task_title,
+                                      fontSize: 20,
+                                    ),
+                                    title:
+                                        Text(snapshot.data[task_id].task_desc),
+                                  );
+                                },
+                              );
+                            }
+                          })),
+                    ));
+                  }).toList(),
                 ),
               ),
             ],
