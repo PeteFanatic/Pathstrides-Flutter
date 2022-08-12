@@ -1,10 +1,10 @@
 // ignore_for_file: unused_local_variable
 
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Services/task_api.dart';
-
+import 'dart:async';
 import '../Services/task_info.dart';
 import '../text_widget.dart';
 import 'home_screen.dart';
@@ -16,19 +16,53 @@ class TaskScreen extends StatefulWidget {
   State<TaskScreen> createState() => _TaskScreenState();
 }
 
-class _TaskScreenState extends State<TaskScreen> {
-  var tasks = <TaskInfo>[];
-  @override
-  void initState() {
-    _getTask();
-    super.initState();
-  }
+class TaskData {
+  int task_id;
+  String task_title = "";
+  String task_desc = "";
+  String points = "";
+  String location = "";
+  int emp_id = 0;
+  int man_id = 0;
 
-  _getTask() {
-    CallApi().getEmployeeTaskData('employeeTask').then((response) {
-      Iterable list = json.decode(response.body);
-      tasks = list.map((model) => TaskInfo.fromJson(model)).toList();
-    });
+  TaskData(this.task_id, this.task_title, this.task_desc, this.points,
+      this.location, this.emp_id, this.man_id);
+}
+
+class _TaskScreenState extends State<TaskScreen> {
+  // var tasks = <TaskInfo>[];
+  // @override
+  // void initState() {
+  //   _getTask();
+  //   super.initState();
+  // }
+
+  // Future _getTask() async {
+  //   CallApi().getEmployeeTaskData('employeeTask').then((response) {
+  //     Iterable list = json.decode(response.body);
+  //     tasks = list.map((model) => TaskInfo.fromJson(model)).toList();
+  //   });
+  // }
+  Future<List<TaskData>> _getTask() async {
+    var data =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeTask'));
+    var jsonData = json.decode(data.body);
+
+    List<TaskData> tasks = [];
+    for (var u in jsonData) {
+      TaskData task = TaskData(
+        u["task_id"],
+        u["task_title"],
+        u["task_desc"],
+        u["points"],
+        u["location"],
+        u["emp_id"],
+        u["man_id"],
+      );
+      tasks.add(task);
+    }
+    print(tasks.length);
+    return tasks;
   }
 
   @override
@@ -37,82 +71,26 @@ class _TaskScreenState extends State<TaskScreen> {
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Container(
-          color: Colors.white,
-          child: SafeArea(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: height * 0.02),
-              Container(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Color.fromARGB(255, 255, 126, 45),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
-                      },
-                    ),
-                    IconButton(
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        icon: const Icon(
-                          Icons.person,
-                          color: Color.fromARGB(255, 255, 126, 45),
-                        ),
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Container()))),
-                  ],
-                ),
-              ),
-              // SizedBox(height: 15,),
-              Container(
-                child: Column(
-                  children: tasks.map((task) {
-                    return Scaffold(
-                        body: Container(
-                      child: FutureBuilder<List>(
-                          future: _getTask(),
-                          builder:
-                              ((BuildContext context, AsyncSnapshot snapshot) {
-                            print(snapshot.data);
-                            if (snapshot.data == null) {
-                              return Center(child: CircularProgressIndicator());
-                            } else {
-                              // List tasks = snapshot.data!;
-                              return ListView.builder(
-                                itemCount: snapshot.data.length,
-                                itemBuilder: (context, task_id) {
-                                  // TaskInfo task = tasks[index];
-
-                                  return ListTile(
-                                    leading: TextWidget(
-                                      text: task.task_title,
-                                      fontSize: 20,
-                                    ),
-                                    title:
-                                        Text(snapshot.data[task_id].task_desc),
-                                  );
-                                },
-                              );
-                            }
-                          })),
-                    ));
-                  }).toList(),
-                ),
-              ),
-            ],
-          ))),
-    );
+        appBar: AppBar(
+          title: new Text("hello"),
+        ),
+        body: Container(
+            child: FutureBuilder(
+          future: _getTask(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.data == null) {
+              return Container(child: Center(child: Text("hi")));
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Text(snapshot.data[index].task_title),
+                  );
+                },
+              );
+            }
+          },
+        )));
   }
 }

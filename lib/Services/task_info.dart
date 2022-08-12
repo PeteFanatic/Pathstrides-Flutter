@@ -6,12 +6,12 @@ class TaskInfo {
   int task_id = 0;
   String task_title = "";
   String task_desc = "";
-  int points = 0;
+  String points = "";
   String location = "";
   int emp_id = 0;
   int man_id = 0;
 
-  TaskInfo(int task_id, String task_title, String task_desc, int points,
+  TaskInfo(int task_id, String task_title, String task_desc, String points,
       String location, int emp_id, int man_id) {
     this.task_id = task_id;
     this.task_title = task_title;
