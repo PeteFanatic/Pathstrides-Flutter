@@ -73,8 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.person,
                 color: Color.fromARGB(255, 255, 126, 45),
               ),
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginScreen())),
+              onPressed: () => Navigator.of(context, rootNavigator: true)
+                  .pushReplacement(MaterialPageRoute(
+                      builder: (context) => new LoginScreen())),
             )
           ],
           // IconButton(
