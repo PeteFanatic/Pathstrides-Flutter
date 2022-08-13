@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => const DashboardScreen(),
+              builder: (BuildContext context) => DashboardScreen(),
             ));
       } else {
         // ignore: use_build_context_synchronously
