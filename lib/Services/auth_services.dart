@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:pathstrides_mobile/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
+
 class AuthServices {
   static Future<http.Response> register(
       String name, String email, String password) async {
@@ -27,6 +28,9 @@ class AuthServices {
       "email": email,
       "password": password,
     };
+    //  var fullUrl = _url + apiUrl + await _getToken();
+    // return await http.post(Uri.parse(fullUrl),
+    //     body: jsonEncode(data), headers: _setHeaders());
     var body = json.encode(data);
     // ignore: prefer_interpolation_to_compose_strings
     var url = Uri.parse(baseURL + 'auth/loginEmployee');

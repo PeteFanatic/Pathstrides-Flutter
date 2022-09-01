@@ -7,7 +7,8 @@ import 'package:pathstrides_mobile/Services/auth_services.dart';
 
 import 'package:pathstrides_mobile/Services/globals.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:shared_preferences/shared_preferences.dart';
+import '../Services/task_api.dart';
 import '../rounded_button.dart';
 import 'dashboard_screen.dart';
 import 'home_screen.dart';
@@ -21,16 +22,39 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String _email = '';
-  String _password = '';
   bool ishiddenPassword = true;
 
+  bool _isLoading = false;
+
+  // TextEditingController mailController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
+  ScaffoldState scaffoldState = ScaffoldState();
+  _showMsg(msg) {
+    //
+    final snackBar = SnackBar(
+      content: Text(msg),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () {
+          // Some code to undo the change!
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   loginPressed() async {
+    
+    var res = await CallApi().postData(data, 'login');
+    var body = json.decode(res.body);
     if (_email.isNotEmpty && _password.isNotEmpty) {
       http.Response response = await AuthServices.login(_email, _password);
       Map responseMap = jsonDecode(response.body);
       if (response.statusCode == 200) {
         // ignore: use_build_context_synchronously
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        localStorage.setString('token', body['token']);
+        localStorage.setString('employee', json.encode(body['employee']));
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -43,18 +67,21 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       errorSnackBar(context, 'enter all required fields');
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
-  // void _togglePasswordView() {
-  //   // if (ishiddenPassword == true) {
-  //   //   ishiddenPassword = false;
-  //   // } else {
-  //   //   ishiddenPassword = true;
-  //   // }
-  //   setState(() {
-  //     ishiddenPassword = !ishiddenPassword;
-  //   });
-  // }
+  void _togglePasswordView() {
+    // if (ishiddenPassword == true) {
+    //   ishiddenPassword = false;
+    // } else {
+    //   ishiddenPassword = true;
+    // }
+    setState(() {
+      ishiddenPassword = !ishiddenPassword;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
           child: TextField(
             obscureText: ishiddenPassword,
+            // controller: passwordController,
             decoration: InputDecoration(
                 hintText: 'Enter password',
                 // ignore: prefer_const_constructors
@@ -143,9 +171,36 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         RoundedButton(
           btnText: 'Log In',
-          onBtnPressed: () => loginPressed(),
+          onBtnPressed: () => _isLoading ? null : loginPressed(),
         )
       ],
     ));
   }
+
+  // void _login() async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+
+  //   var data = {
+  //     'email': mailController.text,
+  //     'password': passwordController.text
+  //   };
+
+  //   var res = await CallApi().postData(data, 'login');
+  //   var body = json.decode(res.body);
+  //   if (body['success']) {
+  //     SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //     localStorage.setString('token', body['token']);
+  //     localStorage.setString('employee', json.encode(body['employee']));
+  //     Navigator.push(context,
+  //         new MaterialPageRoute(builder: (context) => DashboardScreen()));
+  //   } else {
+  //     _showMsg(body['message']);
+  //   }
+
+  //   setState(() {
+  //     _isLoading = false;
+  //   });
+  // }
 }
