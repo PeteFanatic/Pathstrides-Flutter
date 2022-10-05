@@ -5,6 +5,7 @@ import 'Screens/announcement_screen.dart';
 import 'Screens/dashboard_screen.dart';
 import 'Screens/home_screen.dart';
 import 'Screens/login_screen.dart';
+import 'Screens/profile_screen.dart';
 import 'Screens/task_desc.dart';
 import 'Screens/task_screen.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LandingScreen(),
+      home: ProfileScreen(),
     );
   }
 }

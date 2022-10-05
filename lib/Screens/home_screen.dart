@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Screens/login_screen.dart';
+import 'package:pathstrides_mobile/Screens/profile_screen.dart';
 import 'package:pathstrides_mobile/Screens/task_desc.dart';
 import 'announcement_screen.dart';
 import 'dart:convert';
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onPressed: () => Navigator.of(context, rootNavigator: true)
                   .pushReplacement(MaterialPageRoute(
-                      builder: (context) => new LoginScreen())),
+                      builder: (context) => new ProfileScreen())),
             )
           ],
           // IconButton(

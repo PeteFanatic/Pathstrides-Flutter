@@ -3,11 +3,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pathstrides_mobile/Screens/register_screen.dart';
 import 'package:pathstrides_mobile/Services/auth_services.dart';
 
 import 'package:pathstrides_mobile/Services/globals.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Services/task_api.dart';
 import '../rounded_button.dart';
 import 'dashboard_screen.dart';
 import 'home_screen.dart';
@@ -25,18 +28,44 @@ class _LoginScreenState extends State<LoginScreen> {
   String _password = '';
   bool ishiddenPassword = true;
 
+  bool _isLoading = false;
+
+  // TextEditingController mailController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
+  ScaffoldState scaffoldState = ScaffoldState();
+  _showMsg(msg) {
+    //
+    final snackBar = SnackBar(
+      content: Text(msg),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () {
+          // Some code to undo the change!
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   loginPressed() async {
     if (_email.isNotEmpty && _password.isNotEmpty) {
       http.Response response = await AuthServices.login(_email, _password);
       Map responseMap = jsonDecode(response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => RegisterScreen(),
+            ));
+      } else if (response.statusCode == 200) {
         // ignore: use_build_context_synchronously
         Navigator.push(
             context,
             MaterialPageRoute(
               builder: (BuildContext context) => DashboardScreen(),
             ));
-      } else {
+      } else if (response.statusCode == 400) {
         // ignore: use_build_context_synchronously
         errorSnackBar(context, responseMap.values.first);
       }
@@ -44,6 +73,43 @@ class _LoginScreenState extends State<LoginScreen> {
       errorSnackBar(context, 'enter all required fields');
     }
   }
+  // TextEditingController mailController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
+
+  // void loginPressed() async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+
+  //   var data = {
+  //     'email': mailController.text,
+  //     'password': passwordController.text
+  //   };
+
+  //   var res = await CallApi().postData(data, 'login');
+  //   var body = json.decode(res.body);
+  //   if (_email.isNotEmpty && _password.isNotEmpty) {
+  //     http.Response response = await AuthServices.login(_email, _password);
+  //     Map responseMap = jsonDecode(response.body);
+  //     if (body['success']) {
+  //       SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //       localStorage.setString('token', body['token']);
+  //       localStorage.setString('employee', json.encode(body['employee']));
+  //       Navigator.push(context,
+  //           new MaterialPageRoute(builder: (context) => DashboardScreen()));
+  //     } else {
+  //         ignore: use_build_context_synchronously
+  //       errorSnackBar(context, responseMap.values.first);
+  //     }
+  //   } else {
+  //     errorSnackBar(context, 'enter all required fields');
+  //   }
+
+  //   setState(() {
+  //     _isLoading = false;
+  //   });
+
+  // }
 
   // void _togglePasswordView() {
   //   // if (ishiddenPassword == true) {

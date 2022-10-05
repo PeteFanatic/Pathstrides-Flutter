@@ -13,6 +13,7 @@ class _LandingScreenState extends State<LandingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Column(
         verticalDirection: VerticalDirection.down,
         children: <Widget>[

@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:pathstrides_mobile/Services/globals.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthServices {
+  var token;
   static Future<http.Response> register(
       String name, String email, String password) async {
     Map data = {
@@ -38,4 +40,21 @@ class AuthServices {
     print(response.body);
     return response;
   }
+
+  // _getToken() async {
+  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //   token = jsonDecode(localStorage.getString('token'))['token'];
+  // }
+
+  authData(data, apiUrl) async {
+    var fullUrl = Uri.parse(baseURL + 'auth/loginEmployee');
+    return await http.post(fullUrl,
+        body: jsonEncode(data), headers: _setHeaders());
+  }
+
+  _setHeaders() => {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token'
+      };
 }
