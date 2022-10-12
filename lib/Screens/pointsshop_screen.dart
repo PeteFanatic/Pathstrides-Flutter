@@ -39,20 +39,22 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
           ),
         ),
         backgroundColor: Colors.white,
-        toolbarHeight: 120,
+        toolbarHeight: 150,
         flexibleSpace: Container(
           alignment: Alignment.bottomLeft,
+          padding: EdgeInsets.only(left: 70, bottom: 20, top: 20),
           child: Container(
             child: Text(
               'Points: 42,069',
               style: TextStyle(
-                color: Color.fromARGB(255, 255, 153, 0),
+                color: Colors.black,
                 fontFamily: 'Inter-Bold',
                 fontSize: 16,
               ),
             ),
           ),
         ),
+        elevation: 20,
       ),
       backgroundColor: Colors.white,
       bottomNavigationBar: Container(
