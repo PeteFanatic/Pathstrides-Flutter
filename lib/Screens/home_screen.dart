@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onPressed: () => Navigator.of(context, rootNavigator: true)
                   .pushReplacement(MaterialPageRoute(
-                      builder: (context) => new ProfileScreen())),
+                      builder: (context) => new LoginScreen())),
             )
           ],
           // IconButton(
