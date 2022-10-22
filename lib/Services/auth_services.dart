@@ -7,14 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthServices {
   var token;
   static Future<http.Response> register(
-      String name, String email, String password) async {
+      String oldPass, String newPass, String confirmPass) async {
     Map data = {
-      "name": name,
-      "email": email,
-      "password": password,
+      "oldPass": oldPass,
+      "newPass": newPass,
+      "confirmPass": confirmPass,
     };
     var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'auth/register');
+    var url = Uri.parse(baseURL + 'auth/updateEmployeePass');
     http.Response response = await http.post(
       url,
       headers: headers,

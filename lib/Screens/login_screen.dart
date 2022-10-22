@@ -66,6 +66,13 @@ class _LoginScreenState extends State<LoginScreen> {
             MaterialPageRoute(
               builder: (BuildContext context) => DashboardScreen(),
             ));
+      } else if (response.statusCode == 201) {
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => RegisterScreen(),
+            ));
       } else if (response.statusCode == 400) {
         // ignore: use_build_context_synchronously
         errorSnackBar(context, responseMap.values.first);

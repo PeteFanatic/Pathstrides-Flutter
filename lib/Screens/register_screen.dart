@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pathstrides_mobile/Screens/dashboard_screen.dart';
 import 'package:pathstrides_mobile/Services/auth_services.dart';
 import 'package:pathstrides_mobile/Services/globals.dart';
 
@@ -18,10 +19,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  // String _email = '';
-  // String _password = '';
-  // String _name = '';
-
+  String _oldPass = '';
+  String _newPass = '';
+  String _confirmPass = '';
+  bool ishiddenPassword = true;
   // createAccountPressed() async {
   //   bool emailValid = RegExp(
   //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -42,28 +43,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
   //   } else {
   //     errorSnackBar(context, 'email not valid');
   //   }
-  String _password = '';
-  String _new_password = '';
-  String _confirm_password = '';
 
   createAccountPressed() async {
     // bool emailValid = RegExp(
     //         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
     //     .hasMatch(_email);
-    if (_password.isNotEmpty &&
-        _new_password.isNotEmpty &&
-        _confirm_password.isNotEmpty) {
-      http.Response response = await AuthServices.register(
-          _password, _new_password, _confirm_password);
+    if (_oldPass.isNotEmpty && _newPass.isNotEmpty && _confirmPass.isNotEmpty) {
+      http.Response response =
+          await AuthServices.register(_oldPass, _newPass, _confirmPass);
       Map responseMap = jsonDecode(response.body);
       if (response.statusCode == 200) {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => const HomeScreen(),
+              builder: (BuildContext context) => const DashboardScreen(),
             ));
-      } else {
-        errorSnackBar(context, responseMap.values.first[0]);
+      } else if (response.statusCode == 400) {
+        errorSnackBar(context, 'invalid input.');
       }
     } else {
       errorSnackBar(context, 'password not valid');
@@ -72,10 +68,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    resizeToAvoidBottomPadding:
+    false;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             IconButton(
               onPressed: () {
@@ -105,51 +105,116 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(
               height: 20,
             ),
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'Old Password',
-              ),
-              onChanged: (value) {
-                _password = value;
-              },
-              style: TextStyle(
-                fontSize: 14,
-                fontFamily: 'Inter-SemiBold',
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: TextField(
+                obscureText: ishiddenPassword,
+                decoration: InputDecoration(
+                    hintText: 'Current password',
+                    // ignore: prefer_const_constructors
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 255, 126, 45),
+                      ),
+                    ),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          ishiddenPassword = !ishiddenPassword;
+                        });
+                      },
+                      child: Icon(
+                        ishiddenPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: const Color.fromARGB(255, 255, 126, 45),
+                      ),
+                    )),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Inter-SemiBold',
+                ),
+                onChanged: (value) {
+                  _oldPass = value;
+                },
               ),
             ),
             const SizedBox(
               height: 30,
             ),
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'New Password',
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: TextField(
+                obscureText: ishiddenPassword,
+                decoration: InputDecoration(
+                    hintText: 'New password',
+                    // ignore: prefer_const_constructors
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 255, 126, 45),
+                      ),
+                    ),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          ishiddenPassword = !ishiddenPassword;
+                        });
+                      },
+                      child: Icon(
+                        ishiddenPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: const Color.fromARGB(255, 255, 126, 45),
+                      ),
+                    )),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Inter-SemiBold',
+                ),
+                onChanged: (value) {
+                  _newPass = value;
+                },
               ),
-              style: TextStyle(
-                fontSize: 14,
-                fontFamily: 'Inter-SemiBold',
-              ),
-              onChanged: (value) {
-                _new_password = value;
-              },
             ),
             const SizedBox(
               height: 30,
             ),
-            TextField(
-              obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Confirm New Password',
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: TextField(
+                obscureText: ishiddenPassword,
+                decoration: InputDecoration(
+                    hintText: 'Confirm password',
+                    // ignore: prefer_const_constructors
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 255, 126, 45),
+                      ),
+                    ),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          ishiddenPassword = !ishiddenPassword;
+                        });
+                      },
+                      child: Icon(
+                        ishiddenPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: const Color.fromARGB(255, 255, 126, 45),
+                      ),
+                    )),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Inter-SemiBold',
+                ),
+                onChanged: (value) {
+                  _confirmPass = value;
+                },
               ),
-              style: TextStyle(
-                fontSize: 14,
-                fontFamily: 'Inter-SemiBold',
-              ),
-              onChanged: (value) {
-                _confirm_password = value;
-              },
             ),
             const SizedBox(
-              height: 40,
+              height: 50,
             ),
             RoundedButton(
               btnText: 'Update',
