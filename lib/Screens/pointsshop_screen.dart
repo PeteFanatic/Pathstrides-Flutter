@@ -107,7 +107,6 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                     ),
                   ),
                 ),
-                ItemsWidget(),
               ],
             ),
           ),
