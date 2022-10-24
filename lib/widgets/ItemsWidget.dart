@@ -18,10 +18,29 @@ class ItemsWidget extends StatelessWidget {
           margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
           decoration: BoxDecoration(
             color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
                 blurRadius: 25.0,
+                spreadRadius: 1,
+                color: Color.fromARGB(255, 235, 235, 235),
               )
+            ],
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 255, 153, 0),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

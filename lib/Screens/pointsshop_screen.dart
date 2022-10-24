@@ -47,10 +47,10 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
           HomeAppBar(),
           Container(
             //temporary height
-            height: 500,
+            // height: 500,
             padding: EdgeInsets.only(top: 20),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(35),
                 topRight: Radius.circular(35),
@@ -63,7 +63,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 248, 248, 248),
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(
                       width: 1,
@@ -107,6 +107,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                     ),
                   ),
                 ),
+                ItemsWidget(),
               ],
             ),
           ),
