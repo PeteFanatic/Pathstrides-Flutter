@@ -5,6 +5,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:pathstrides_mobile/widgets/ItemsWidget.dart';
 
 import '../widgets/HomeAppBar.dart';
 
@@ -19,29 +20,28 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
-      // bottomNavigationBar: Container(
-      //   color: Colors.white,
-      //   child: Padding(
-      //     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-      //     child: GNav(
-      //       gap: 8,
-      //       padding: EdgeInsets.all(15),
-      //       backgroundColor: Colors.white,
-      //       color: Color.fromARGB(255, 255, 153, 0),
-      //       activeColor: Color.fromARGB(255, 255, 153, 0),
-      //       tabBackgroundColor: Color.fromARGB(69, 255, 153, 0),
-      //       tabs: const [
-      //         GButton(icon: Icons.home),
-      //         GButton(icon: Icons.announcement),
-      //         GButton(icon: Icons.list),
-      //         GButton(icon: Icons.notifications),
-      //         GButton(icon: Icons.person),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-      //backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+          child: GNav(
+            gap: 8,
+            padding: EdgeInsets.all(15),
+            backgroundColor: Colors.white,
+            color: Color.fromARGB(255, 255, 153, 0),
+            activeColor: Color.fromARGB(255, 255, 153, 0),
+            tabBackgroundColor: Color.fromARGB(69, 255, 153, 0),
+            tabs: const [
+              GButton(icon: Icons.home),
+              GButton(icon: Icons.announcement),
+              GButton(icon: Icons.list),
+              GButton(icon: Icons.notifications),
+              GButton(icon: Icons.person),
+            ],
+          ),
+        ),
+      ),
       body: ListView(
         children: [
           HomeAppBar(),
@@ -99,7 +99,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                     horizontal: 10,
                   ),
                   child: Text(
-                    "Categories",
+                    "Items",
                     style: TextStyle(
                       fontSize: 20,
                       fontFamily: 'Inter-Bold',
@@ -107,6 +107,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                     ),
                   ),
                 ),
+                ItemsWidget(),
               ],
             ),
           ),
