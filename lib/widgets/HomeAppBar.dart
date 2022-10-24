@@ -11,7 +11,7 @@ class HomeAppBar extends StatelessWidget {
       child: Row(
         children: [
           Icon(
-            Icons.sort,
+            Icons.arrow_back_outlined,
             size: 30,
             color: Color.fromARGB(255, 255, 153, 0),
           ),
