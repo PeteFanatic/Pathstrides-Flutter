@@ -6,7 +6,7 @@ class ItemsWidget extends StatelessWidget {
     return GridView.count(
       childAspectRatio: 0.68,
       // physics: NeverScrollableScrollPhysics(),
-      crossAxisCount: 3, //number of columns in a grid view
+      crossAxisCount: 2, //number of columns in a grid view
       shrinkWrap: true,
       children: [
         Container(
@@ -38,8 +38,41 @@ class ItemsWidget extends StatelessWidget {
                       color: Color.fromARGB(255, 255, 153, 0),
                       borderRadius: BorderRadius.circular(20),
                     ),
+                    child: Text(
+                      "-50%",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontFamily: "Inter",
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.favorite_border_outlined,
+                    color: Colors.black,
                   ),
                 ],
+              ),
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  child: Image.asset(
+                    "./assets/images/starbucksgiftcard.png",
+                    height: 120,
+                    width: 120,
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(bottom: 8),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Product Title",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: "Inter-Medium",
+                  ),
+                ),
               ),
             ],
           ),
