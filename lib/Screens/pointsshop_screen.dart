@@ -17,6 +17,19 @@ class PointsShopScreen extends StatefulWidget {
 }
 
 class _PointsShopScreenState extends State<PointsShopScreen> {
+  var items = "";
+  @override
+
+  void initState()
+  {
+    _getItems();
+    super.initState();
+  }
+
+  _getItems(){
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
