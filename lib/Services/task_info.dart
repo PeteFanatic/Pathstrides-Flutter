@@ -8,8 +8,8 @@ class TaskInfo {
   String task_desc = "";
   String points = "";
   String location = "";
-  int emp_id = 0;
-  int man_id = 0;
+  int status = 0;
+  int user_id = 0;
 
   TaskInfo(int task_id, String task_title, String task_desc, String points,
       String location, int emp_id, int man_id) {
@@ -18,8 +18,8 @@ class TaskInfo {
     this.task_desc = task_desc;
     this.points = points;
     this.location = location;
-    this.emp_id = emp_id;
-    this.man_id = man_id;
+    this.status = status;
+    this.user_id = user_id;
   }
 
   TaskInfo.fromJson(Map json)
@@ -28,6 +28,6 @@ class TaskInfo {
         task_desc = json['task_desc'],
         points = json['points'],
         location = json['location'],
-        emp_id = json['emp_id'],
-        man_id = json['man_id'];
+        status = json['status'],
+        user_id = json['user_id'];
 }

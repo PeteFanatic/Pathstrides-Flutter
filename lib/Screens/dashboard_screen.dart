@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Screens/profile_screen.dart';
 import 'package:pathstrides_mobile/Screens/task_screen.dart';
-import 'announcement_screen.dart';
+import 'package:pathstrides_mobile/Screens/announcement_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
 

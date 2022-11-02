@@ -21,27 +21,14 @@ class TaskData {
   String task_desc = "";
   String points = "";
   String location = "";
-  int emp_id = 0;
-  int man_id = 0;
+  int status = 0;
+  int user_id = 0;
 
   TaskData(this.task_id, this.task_title, this.task_desc, this.points,
-      this.location, this.emp_id, this.man_id);
+      this.location, this.status, this.user_id);
 }
 
 class _TaskScreenState extends State<TaskScreen> {
-  // var tasks = <TaskInfo>[];
-  // @override
-  // void initState() {
-  //   _getTask();
-  //   super.initState();
-  // }
-
-  // Future _getTask() async {
-  //   CallApi().getEmployeeTaskData('employeeTask').then((response) {
-  //     Iterable list = json.decode(response.body);
-  //     tasks = list.map((model) => TaskInfo.fromJson(model)).toList();
-  //   });
-  // }
   Future<List<TaskData>> _getTask() async {
     var data =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeTask'));
@@ -55,8 +42,8 @@ class _TaskScreenState extends State<TaskScreen> {
         u["task_desc"],
         u["points"],
         u["location"],
-        u["emp_id"],
-        u["man_id"],
+        u["status"],
+        u["user_id"],
       );
       tasks.add(task);
     }
@@ -106,7 +93,7 @@ class _TaskScreenState extends State<TaskScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   TaskData data = snapshot.data[index];
                   return Card(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 255, 255, 255),
                     margin: EdgeInsets.symmetric(
                       horizontal: 10,
                       vertical: 5,

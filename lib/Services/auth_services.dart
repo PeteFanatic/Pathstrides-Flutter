@@ -11,9 +11,10 @@ class AuthServices {
     Map data = {
       "oldPass": oldPass,
       "newPass": newPass,
-      "confirmPass": confirmPass,
+      "confirmPass": confirmPass
     };
     var body = json.encode(data);
+    // ignore: prefer_interpolation_to_compose_strings
     var url = Uri.parse(baseURL + 'auth/updateEmployeePass');
     http.Response response = await http.post(
       url,
@@ -46,11 +47,11 @@ class AuthServices {
   //   token = jsonDecode(localStorage.getString('token'))['token'];
   // }
 
-  authData(data, apiUrl) async {
-    var fullUrl = Uri.parse(baseURL + 'auth/loginEmployee');
-    return await http.post(fullUrl,
-        body: jsonEncode(data), headers: _setHeaders());
-  }
+  // authData(data, apiUrl) async {
+  //   var fullUrl = Uri.parse(baseURL + 'auth/loginEmployee');
+  //   return await http.post(fullUrl,
+  //       body: jsonEncode(data), headers: _setHeaders());
+  // }
 
   _setHeaders() => {
         'Content-type': 'application/json',

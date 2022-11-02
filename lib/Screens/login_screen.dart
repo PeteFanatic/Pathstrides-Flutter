@@ -8,12 +8,12 @@ import 'package:pathstrides_mobile/Services/auth_services.dart';
 
 import 'package:pathstrides_mobile/Services/globals.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Services/task_api.dart';
+//import '../Services/task_api.dart';
 import '../rounded_button.dart';
 import 'dashboard_screen.dart';
-import 'home_screen.dart';
+//import 'home_screen.dart';
 import 'landing_screen.dart';
 
 class LoginScreen extends StatefulWidget {

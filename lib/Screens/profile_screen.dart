@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -12,7 +15,66 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
+class UserData {
+  int user_id;
+  String user_fname = "";
+  String user_mname = "";
+  String user_lname = "";
+  String user_email = "";
+  String user_contactnumber = "";
+  String user_username = "";
+  String user_password = "";
+  String user_department = "";
+  int role = 0;
+  int status = 0;
+  int admin_id = 0;
+  int dept_id = 0;
+
+  UserData(
+      this.user_id,
+      this.user_fname,
+      this.user_mname,
+      this.user_lname,
+      this.user_email,
+      this.user_contactnumber,
+      this.user_username,
+      this.user_password,
+      this.user_department,
+      this.role,
+      this.status,
+      this.admin_id,
+      this.dept_id);
+}
+
 class _ProfileScreenState extends State<ProfileScreen> {
+  Future<List<UserData>> _getUser() async {
+    var data =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeUser'));
+    var jsonData = json.decode(data.body);
+
+    List<UserData> users = [];
+    for (var u in jsonData) {
+      UserData user = UserData(
+        u["user_id"],
+        u["user_fname"],
+        u["user_mname"],
+        u["user_lname"],
+        u["user_email"],
+        u["user_contactnumber"],
+        u["user_username"],
+        u["user_password"],
+        u["user_department"],
+        u["role"],
+        u["status"],
+        u["admin_id"],
+        u["dept_id"],
+      );
+      users.add(user);
+    }
+
+    return users;
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

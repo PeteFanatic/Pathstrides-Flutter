@@ -33,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
         u["task_desc"],
         u["points"],
         u["location"],
-        u["emp_id"],
-        u["man_id"],
+        u["status"],
+        u["user_id"],
       );
       tasks.add(task);
     }
@@ -55,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
         a["ann_title"],
         a["ann_desc"],
         a["location"],
-        a["man_id"],
+        a["status"],
+        a["user_id"],
       );
       announcements.add(announcement);
     }

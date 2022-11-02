@@ -62,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         errorSnackBar(context, 'invalid input.');
       }
     } else {
-      errorSnackBar(context, 'password not valid');
+      errorSnackBar(context, 'Incomplete Credentials.');
     }
   }
 

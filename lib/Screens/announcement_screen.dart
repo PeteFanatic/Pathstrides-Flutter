@@ -19,10 +19,11 @@ class AnnouncementData {
   String ann_title = "";
   String ann_desc = "";
   String location = "";
-  int man_id = 0;
+  int status;
+  int user_id = 0;
 
-  AnnouncementData(
-      this.ann_id, this.ann_title, this.ann_desc, this.location, this.man_id);
+  AnnouncementData(this.ann_id, this.ann_title, this.ann_desc, this.location,
+      this.status, this.user_id);
 }
 
 class _AnnouncementScreenState extends State<AnnouncementScreen> {
@@ -51,7 +52,8 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
         a["ann_title"],
         a["ann_desc"],
         a["location"],
-        a["man_id"],
+        a["status"],
+        a["user_id"],
       );
       announcements.add(announcement);
     }
