@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:pathstrides_mobile/Screens/geolocation_screen.dart';
 import 'package:pathstrides_mobile/Screens/task_report.dart';
 
-import 'home_screen.dart';
 import 'package:flutter/material.dart';
 import '../Screens/task_screen.dart';
 
@@ -126,7 +126,7 @@ class _TaskDescriptionState extends State<TaskDescription> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const TaskScreen()));
+                        builder: (context) => const GeolocationScreen()));
                   },
 
                   // style: ButtonStyle(elevation: MaterialStateProperty(12.0 )),

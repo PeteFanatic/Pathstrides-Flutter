@@ -47,32 +47,26 @@ class UserData {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Future<List<UserData>> _getUser() async {
+  Future<UserData> _getUser() async {
     var data =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeUser'));
     var jsonData = json.decode(data.body);
 
-    List<UserData> users = [];
-    for (var u in jsonData) {
-      UserData user = UserData(
-        u["user_id"],
-        u["user_fname"],
-        u["user_mname"],
-        u["user_lname"],
-        u["user_email"],
-        u["user_contactnumber"],
-        u["user_username"],
-        u["user_password"],
-        u["user_department"],
-        u["role"],
-        u["status"],
-        u["admin_id"],
-        u["dept_id"],
-      );
-      users.add(user);
-    }
-
-    return users;
+    var u = jsonData;
+    UserData user = u["user_id"];
+    u["user_fname"];
+    u["user_mname"];
+    u["user_lname"];
+    u["user_email"];
+    u["user_contactnumber"];
+    u["user_username"];
+    u["user_password"];
+    u["user_department"];
+    u["role"];
+    u["status"];
+    u["admin_id"];
+    u["dept_id"];
+    return user;
   }
 
   @override

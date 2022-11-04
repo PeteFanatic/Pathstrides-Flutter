@@ -36,6 +36,20 @@ class CallApi {
     }
   }
 
+  getProfileData(apiUrl) async {
+    http.Response response = await http.get(Uri.parse(_url + apiUrl));
+    try {
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        return 'failed';
+      }
+    } catch (e) {
+      print(e);
+      return 'failed';
+    }
+  }
+
   // Future postData(data, apiUrl) async {
   //   var fullUrl = _url + apiUrl + await _getToken();
   //   return await http.post(Uri.parse(fullUrl),
