@@ -102,15 +102,13 @@ class _GeolocationScreenState extends State<GeolocationScreen> {
         //     polylineId: PolylineId("route"), points: polylineCoordinates),
         markers: {
           Marker(
-            markerId: const MarkerId("source"),
-            position: sourceLocation,
-            draggable: true,
-            onDragEnd: (value) {},
+            markerId: const MarkerId("destination"),
+            position: destination,
             icon: markerIcon,
           ),
           const Marker(
-            markerId: MarkerId("destination"),
-            position: destination,
+            markerId: MarkerId("source"),
+            position: sourceLocation,
           ),
         },
         circles: {
@@ -118,9 +116,9 @@ class _GeolocationScreenState extends State<GeolocationScreen> {
               circleId: CircleId("1"),
               center: destination,
               radius: 200,
-              strokeWidth: 2,
+              strokeWidth: 1,
               strokeColor: Color.fromARGB(255, 255, 102, 0),
-              fillColor: Color.fromARGB(255, 255, 102, 0).withOpacity(0.2)),
+              fillColor: Color.fromARGB(255, 255, 102, 0).withOpacity(0.1)),
           //radius:430,
         },
         // const AddressInfo(isIntheDeliverArea: true,)
