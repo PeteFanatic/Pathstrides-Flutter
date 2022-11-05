@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PointsShopScreen(),
-      // home: GeolocationScreen(),
+      // home: PointsShopScreen(),
+      home: GeolocationScreen(),
     );
   }
 }
