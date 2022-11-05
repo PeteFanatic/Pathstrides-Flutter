@@ -5,8 +5,10 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:http/http.dart';
 import 'package:pathstrides_mobile/widgets/ItemsWidget.dart';
 
+import '../Services/pointsshop_api.dart';
 import '../widgets/HomeAppBar.dart';
 
 class PointsShopScreen extends StatefulWidget {
@@ -19,16 +21,18 @@ class PointsShopScreen extends StatefulWidget {
 class _PointsShopScreenState extends State<PointsShopScreen> {
   var items = "";
   @override
-
-  void initState()
-  {
+  void initState() {
     _getItems();
     super.initState();
   }
 
-  _getItems(){
-    
+  _getItems() {
+    CallPointsShop().getItemData('getrecent').then(
+          (response) {},
+        );
   }
+
+////////////////////// UI ////////////////////
 
   @override
   Widget build(BuildContext context) {

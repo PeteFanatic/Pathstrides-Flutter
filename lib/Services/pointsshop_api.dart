@@ -8,8 +8,10 @@ class CallPointsShop {
     return _imgUrl;
   }
 
-  getProductData(apiUrl) async {
-    http.Response response = await http.get(Uri.parse(_url + apiUrl));
+  getItemData(apiUrl) async {
+    http.Response response = await http.get(
+      Uri.parse(_url + apiUrl),
+    );
 
     try {
       if (response.statusCode == 200) {
