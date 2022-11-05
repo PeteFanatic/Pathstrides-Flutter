@@ -4,7 +4,11 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:location/location.dart' as loc;
 import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:math' show cos, sqrt, asin;
+import 'dart:math'
+    show
+        cos,
+        sqrt,
+        asin; //for calculating the destination of user's current location and destination
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({Key? key}) : super(key: key);
