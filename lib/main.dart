@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Screens/geolocation_screen.dart';
 import 'package:pathstrides_mobile/Screens/landing_screen.dart';
+import 'package:pathstrides_mobile/Screens/pointsshop_screen.dart';
 import 'package:pathstrides_mobile/Screens/task_report.dart';
 import '../Screens/register_screen.dart';
 import 'Screens/announcement_screen.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
+      home: PointsShopScreen(),
       home: GeolocationScreen(),
     );
   }
