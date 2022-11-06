@@ -147,7 +147,7 @@ class _GeolocationScreenState extends State<GeolocationScreen> {
 
   void setPolylines() async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        "<GOOGLE_MAPS_API_KEY_HERE>",
+        "AIzaSyCXRiiMpCWRSo4oxseHQ9cwgo98bCdOjyc",
         PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
         PointLatLng(destination.latitude, destination.longitude));
 
