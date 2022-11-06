@@ -30,15 +30,14 @@ class _GeolocationScreenState extends State<GeolocationScreen> {
   List<LatLng> polylineCoordinates = [];
   // ^ store each coordiante for polylines. bc each polyline is made up of multiple coordinates. so we need a list of latlong references
   PolylinePoints polylinePoints;
-  // ^ will fetch the route between the source location and destination location and the route will be a list of points
+  // ^ will fetch the route between
 
   @override
   void initState() {
     addCustomIcon();
     super.initState();
 
-    polylinePoints =
-        PolylinePoints(); //instantiate the polyline points to be able to call to the directions api
+    polylinePoints = PolylinePoints();
 
     //set up initial locations
   }
@@ -139,7 +138,6 @@ class _GeolocationScreenState extends State<GeolocationScreen> {
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
 
-            showPinsOnMap();
             setPolylines();
           }
           // const AddressInfo(isIntheDeliverArea: true,)
@@ -147,35 +145,24 @@ class _GeolocationScreenState extends State<GeolocationScreen> {
     );
   }
 
-  void showPinsOnMap() {
-    setState(() {});
-  }
-
   void setPolylines() async {
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "AIzaSyCXRiiMpCWRSo4oxseHQ9cwgo98bCdOjyc", //api key
-      PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
-      PointLatLng(destination.latitude, destination.longitude),
-    );
+        "<GOOGLE_MAPS_API_KEY_HERE>",
+        PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
+        PointLatLng(destination.latitude, destination.longitude));
 
     if (result.status == 'OK') {
       result.points.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
-      // ^ the polyline result will return an array of points. each point will be a point latlng reference
 
-      setState(
-        () {
-          _polylines.add(
-            Polyline(
-              width: 10,
-              polylineId: PolylineId('polyLine'),
-              color: Color(0xFF08A5CB),
-              points: polylineCoordinates,
-            ),
-          );
-        },
-      );
+      setState(() {
+        _polylines.add(Polyline(
+            width: 10,
+            polylineId: PolylineId('polyLine'),
+            color: Color(0xFF08A5CB),
+            points: polylineCoordinates));
+      });
     }
   }
 }
