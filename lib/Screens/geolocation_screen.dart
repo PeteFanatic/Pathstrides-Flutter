@@ -177,7 +177,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 const LatLng SOURCE_LOCATION =
-    LatLng(10.294929170035095, 123.88107499718254); //cit
+    LatLng(10.332693082806154, 123.904893794083); //sugbo mercado it park
 const LatLng DEST_LOCATION =
     LatLng(10.290322648885569, 123.87043543404714); //shopwise
 const double CAMERA_ZOOM = 16;
