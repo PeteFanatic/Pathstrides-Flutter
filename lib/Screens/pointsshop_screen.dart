@@ -21,21 +21,21 @@ class PointsShopScreen extends StatefulWidget {
 }
 
 class PointShopData {
-  String name = "";
+  String points_name = "";
   int points;
-  PointShopData(this.name, this.points);
+  PointShopData(this.points_name, this.points);
 }
 
 class _PointsShopScreenState extends State<PointsShopScreen> {
   Future<List<PointShopData>> _getPointShop() async {
-    var data2 =
+    var data3 =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeePointShop'));
-    var jsonData = json.decode(data2.body);
+    var jsonData = json.decode(data3.body);
 
     List<PointShopData> pointShops = [];
     for (var p in jsonData) {
       PointShopData pointShop = PointShopData(
-        p["name"],
+        p["points_name"],
         p["points"],
       );
       pointShops.add(pointShop);
@@ -75,15 +75,15 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
         body: Container(
             child: FutureBuilder(
           future: _getPointShop(),
-          builder: (BuildContext context, AsyncSnapshot snapshot2) {
-            if (snapshot2.data == null) {
+          builder: (BuildContext context, AsyncSnapshot snapshot3) {
+            if (snapshot3.data == null) {
               return Container(
                   child: Center(child: CircularProgressIndicator()));
             } else {
               return ListView.builder(
-                itemCount: snapshot2.data.length,
+                itemCount: snapshot3.data.length,
                 itemBuilder: (BuildContext context, int index) {
-                  PointShopData data = snapshot2.data[index];
+                  PointShopData data = snapshot3.data[index];
                   return Card(
                     color: Colors.white,
                     margin: EdgeInsets.symmetric(
@@ -92,12 +92,12 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                     ),
                     child: ListTile(
                       title: Text(
-                        snapshot2.data[index].name,
+                        snapshot3.data[index].points_name,
                         style:
                             TextStyle(fontFamily: 'Inter-black', fontSize: 18),
                       ),
                       subtitle: Text(
-                        snapshot2.data[index].points,
+                        snapshot3.data[index].points,
                         style: TextStyle(
                             fontFamily: 'Inter-semibold', fontSize: 12),
                       ),

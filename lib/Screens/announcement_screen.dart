@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable, prefer_const_constructors, avoid_unnecessary_containers, unnecessary_new, avoid_print, non_constant_identifier_names
 
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -15,15 +16,18 @@ class AnnouncementScreen extends StatefulWidget {
 }
 
 class AnnouncementData {
-  int ann_id;
-  String ann_title = "";
-  String ann_desc = "";
+  Int anns_id;
+  String anns_title = "";
+  String anns_desc = "";
   String location = "";
-  int status;
-  int user_id = 0;
+  Float anns_lat;
+  Float anns_long;
+  // int status;
+  // int user_id = 0;
 
-  AnnouncementData(this.ann_id, this.ann_title, this.ann_desc, this.location,
-      this.status, this.user_id);
+  AnnouncementData(this.anns_id, this.anns_title, this.anns_desc, this.location,
+      this.anns_lat, this.anns_long);
+  // this.status, this.user_id);
 }
 
 class _AnnouncementScreenState extends State<AnnouncementScreen> {
@@ -48,12 +52,13 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
     List<AnnouncementData> announcements = [];
     for (var a in jsonData) {
       AnnouncementData announcement = AnnouncementData(
-        a["ann_id"],
-        a["ann_title"],
-        a["ann_desc"],
+        a["anns_id"],
+        a["anns_title"],
+        a["anns_desc"],
         a["location"],
-        a["status"],
-        a["user_id"],
+        a["anns_lat"],
+        a["anns_long"],
+        // a["user_id"],
       );
       announcements.add(announcement);
     }
@@ -109,7 +114,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                     ),
                     child: ListTile(
                       title: Text(
-                        snapshot2.data[index].ann_title,
+                        snapshot2.data[index].anns_title,
                         style:
                             TextStyle(fontFamily: 'Inter-black', fontSize: 18),
                       ),
