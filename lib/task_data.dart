@@ -30,6 +30,12 @@ class _TaskScreenState extends State<TaskScreen> {
       tasks = list.map((model) => TaskInfo.fromJson(model)).toList();
     });
   }
+  // Future _getAnnouncement() async {
+  //   CallApi().getAnnouncementData('employeeAnnounce').then((response) {
+  //     Iterable list = json.decode(response.body);
+  //     anns = list.map((model) => TaskInfo.fromJson(model)).toList();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

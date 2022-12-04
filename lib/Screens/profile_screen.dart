@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 
 class ProfileScreen extends StatefulWidget {
+  //ProfileData profileview;
   const ProfileScreen({super.key});
 
   @override
@@ -129,6 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       height: 80,
                                     ),
                                     const Text(
+                                      //widget.profileview.user_fname,
                                       'User_01', //Employee's first and last name
                                       style: TextStyle(
                                         color: Colors.black,

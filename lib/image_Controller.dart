@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,6 +8,8 @@ import 'package:http/http.dart' as http;
 
 class ImageController extends GetxController {
   PickedFile? _pickedFile;
+  Uint8List? _bytesImage;
+  String? base64Image;
   PickedFile? get pickedFile => _pickedFile;
   final _picker = ImagePicker();
   Future<void> pickImage() async {
@@ -34,9 +37,14 @@ class ImageController extends GetxController {
 
 //updateimage= update profile
   Future<bool> upload() async {
+    Uint8List _bytesImage;
     update();
     bool success = false;
     http.StreamedResponse response = await updateImage(_pickedFile);
+    String base64Image;
+    http.StreamedResponse imageBytes = response;
+    base64Image = base64Encode(response as List<int>);
+    _bytesImage = Base64Decoder().convert(base64Image);
     //_isLoading = false;
     if (response.statusCode == 200) {
       Map map = jsonDecode(await response.stream.bytesToString());

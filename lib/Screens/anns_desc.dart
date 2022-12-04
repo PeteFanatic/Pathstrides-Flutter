@@ -22,7 +22,7 @@ class AnnounceDescription extends StatelessWidget {
             },
           ),
           title: Text(
-            announceview.ann_title,
+            announceview.anns_title,
             style: TextStyle(
               fontFamily: 'Inter-bold',
               color: Colors.black,
@@ -53,7 +53,7 @@ class AnnounceDescription extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   margin: const EdgeInsets.only(left: 10.0, right: 0.0),
                   child: Text(
-                    announceview.ann_title,
+                    announceview.anns_title,
                     textAlign: TextAlign.left,
                     style: TextStyle(fontSize: 30.0, fontFamily: 'Inter-black'),
                   ),
@@ -98,7 +98,7 @@ class AnnounceDescription extends StatelessWidget {
                           padding: EdgeInsets.only(
                               top: 10.0, left: 10.0, bottom: 0.0, right: 0.0),
                           child: Text(
-                            announceview.ann_desc,
+                            announceview.anns_desc,
                             style: TextStyle(
                                 fontFamily: 'Inter-regular', fontSize: 14),
                           ),

@@ -28,14 +28,16 @@ class _HomeScreenState extends State<HomeScreen> {
     List<TaskData> tasks = [];
     for (var u in jsonData) {
       TaskData task = TaskData(
-        u["task_id"],
-        u["task_title"],
-        u["task_desc"],
-        u["points"],
-        u["location"],
-        u["status"],
-        u["user_id"],
-      );
+          u["task_id"],
+          u["task_title"],
+          u["task_desc"],
+          u["points"],
+          u["address"],
+          u["task_lat"],
+          u["task_long"],
+          // u["status"],
+          u["user_id"],
+          u["deadline"]);
       tasks.add(task);
     }
     print(tasks.length);
@@ -51,12 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
     List<AnnouncementData> announcements = [];
     for (var a in jsonData) {
       AnnouncementData announcement = AnnouncementData(
-        a["ann_id"],
-        a["ann_title"],
-        a["ann_desc"],
+        a["anns_id"],
+        a["anns_title"],
+        a["anns_desc"],
         a["location"],
-        a["status"],
-        a["user_id"],
+        a["anns_lat"],
+        a["anns_long"],
+
+        //a["status"],
+        //a["user_id"],
       );
       announcements.add(announcement);
     }
@@ -148,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontFamily: 'Inter-black', fontSize: 18),
                                 ),
                                 subtitle: Text(
-                                  snapshot.data[index].location,
+                                  snapshot.data[index].address,
                                   style: TextStyle(
                                       fontFamily: 'Inter-semibold',
                                       fontSize: 12),
@@ -209,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: ListTile(
                                 title: Text(
-                                  snapshot2.data[index].ann_title,
+                                  snapshot2.data[index].anns_title,
                                   style: TextStyle(
                                       fontFamily: 'Inter-black', fontSize: 18),
                                 ),

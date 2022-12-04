@@ -46,6 +46,11 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   location: ^4.4.0
   google_maps_flutter: ^2.2.1
+  provider: ^6.0.4
+  geolocator: ^7.7.1
+  geocoding: ^2.0.5
+  url_launcher: ^6.1.6
+  easy_geofencing: ^0.2.0
   
 dev_dependencies:
   flutter_test:

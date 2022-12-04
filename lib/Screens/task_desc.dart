@@ -4,6 +4,7 @@ import 'package:pathstrides_mobile/Screens/geolocation_screen.dart';
 import 'package:pathstrides_mobile/Screens/task_report.dart';
 
 import 'package:flutter/material.dart';
+import 'package:pathstrides_mobile/Services/navigation_screen.dart';
 import '../Screens/task_screen.dart';
 
 class TaskDescription extends StatefulWidget {
@@ -38,7 +39,7 @@ class _TaskDescriptionState extends State<TaskDescription> {
             ),
           ),
           backgroundColor: Color.fromARGB(255, 240, 240, 240),
-          elevation: 0,
+          elevation: 10,
           // iconTheme: IconThemeData(
           //   color: const Color.fromARGB(255, 255, 126, 45),
           // ),
@@ -71,8 +72,30 @@ class _TaskDescriptionState extends State<TaskDescription> {
                   alignment: Alignment.topLeft,
                   margin: const EdgeInsets.only(left: 10.0, right: 0.0),
                   child: Text(
-                    widget.taskview.location,
+                    widget.taskview.address,
                     textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black,
+                        fontFamily: 'Inter-semibold'),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      top: 30.0, left: 0.0, bottom: 5.0, right: 200.0),
+                  child: Text(
+                    " Earning points: ${widget.taskview.points} points",
+                    style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black,
+                        fontFamily: 'Inter-semibold'),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      top: 0.0, left: 0.0, bottom: 0.0, right: 200.0),
+                  child: Text(
+                    "Deadline: ${widget.taskview.deadline} points",
                     style: TextStyle(
                         fontSize: 14.0,
                         color: Colors.black,
@@ -112,21 +135,12 @@ class _TaskDescriptionState extends State<TaskDescription> {
                                 fontFamily: 'Inter-regular', fontSize: 14),
                           ),
                         ))),
-                Container(
-                  padding: EdgeInsets.only(
-                      top: 0.0, left: 0.0, bottom: 50.0, right: 200.0),
-                  child: Text(
-                    "Earning points: ${widget.taskview.points} points",
-                    style: TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.black,
-                        fontFamily: 'Inter-semibold'),
-                  ),
-                ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const GeolocationScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => NavigationScreen(
+                            double.parse(widget.taskview.task_lat),
+                            double.parse(widget.taskview.task_long))));
                   },
 
                   // style: ButtonStyle(elevation: MaterialStateProperty(12.0 )),
@@ -160,6 +174,60 @@ class _TaskDescriptionState extends State<TaskDescription> {
                           fontFamily: 'Inter-Bold',
                           fontSize: 18)),
                   child: const Text('Task Report'),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  margin: const EdgeInsets.only(
+                      top: 30, left: 10.0, right: 0.0, bottom: 0),
+                  child: Text(
+                    "Comments",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.black,
+                        fontFamily: 'Inter-bold'),
+                  ),
+                ),
+                Container(
+                    padding: EdgeInsets.only(
+                        top: 10.0, left: 10.0, bottom: 0.0, right: 10.0),
+                    height: 100,
+                    width: 380,
+                    child: const Card(
+                        color: Colors.white,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 0,
+                          vertical: 5,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              top: 10.0, left: 10.0, bottom: 0.0, right: 0.0),
+                          child: Text(
+                            '',
+                            style: TextStyle(
+                                fontFamily: 'Inter-regular', fontSize: 14),
+                          ),
+                        ))),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => NavigationScreen(
+                            double.parse(widget.taskview.task_lat),
+                            double.parse(widget.taskview.task_long))));
+                  },
+
+                  // style: ButtonStyle(elevation: MaterialStateProperty(12.0 )),
+                  style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                          top: 0.0, left: 0.0, bottom: 0.0, right: 0.0),
+                      minimumSize: const Size(80, 40),
+                      backgroundColor: Color.fromARGB(255, 64, 151, 64),
+                      elevation: 12.0,
+                      textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Inter-Bold',
+                          fontSize: 18)),
+                  child: const Text('Send'),
                 ),
               ],
             ),

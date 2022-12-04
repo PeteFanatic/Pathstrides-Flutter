@@ -19,13 +19,25 @@ class TaskData {
   int task_id;
   String task_title = "";
   String task_desc = "";
-  String points = "";
-  String location = "";
-  int status = 0;
+  int points = 0;
+  String address = "";
+  String task_lat = "";
+  String task_long = "";
+  // int status = 0;
   int user_id = 0;
+  String deadline = "";
 
-  TaskData(this.task_id, this.task_title, this.task_desc, this.points,
-      this.location, this.status, this.user_id);
+  TaskData(
+      this.task_id,
+      this.task_title,
+      this.task_desc,
+      this.points,
+      this.address,
+      this.task_lat,
+      this.task_long,
+      // this.status,
+      this.user_id,
+      this.deadline);
 }
 
 class _TaskScreenState extends State<TaskScreen> {
@@ -37,14 +49,16 @@ class _TaskScreenState extends State<TaskScreen> {
     List<TaskData> tasks = [];
     for (var u in jsonData) {
       TaskData task = TaskData(
-        u["task_id"],
-        u["task_title"],
-        u["task_desc"],
-        u["points"],
-        u["location"],
-        u["status"],
-        u["user_id"],
-      );
+          u["task_id"],
+          u["task_title"],
+          u["task_desc"],
+          u["points"],
+          u["address"],
+          u["task_lat"],
+          u["task_long"],
+          // u["status"],
+          u["user_id"],
+          u["deadline"]);
       tasks.add(task);
     }
     print(tasks.length);
@@ -105,7 +119,7 @@ class _TaskScreenState extends State<TaskScreen> {
                             TextStyle(fontFamily: 'Inter-black', fontSize: 18),
                       ),
                       subtitle: Text(
-                        snapshot.data[index].location,
+                        snapshot.data[index].address,
                         style: TextStyle(
                             fontFamily: 'Inter-semibold', fontSize: 12),
                       ),
