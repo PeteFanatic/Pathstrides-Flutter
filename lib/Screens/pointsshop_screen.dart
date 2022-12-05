@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +8,9 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+//import 'package:pathstrides_mobile/widgets/ItemsWidget.dart';
 
+import '../widgets/HomeAppBar.dart';
 import 'home_screen.dart';
 
 class PointsShopScreen extends StatefulWidget {
@@ -15,69 +20,94 @@ class PointsShopScreen extends StatefulWidget {
   State<PointsShopScreen> createState() => _PointsShopScreenState();
 }
 
+class PointShopData {
+  int points;
+  String points_name = "";
+
+  PointShopData(this.points_name, this.points);
+}
+
 class _PointsShopScreenState extends State<PointsShopScreen> {
+  Future<List<PointShopData>> _getPointShop() async {
+    var data3 =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/employeePointShop'));
+    var jsonData = json.decode(data3.body);
+
+    List<PointShopData> pointShops = [];
+    for (var p in jsonData) {
+      PointShopData pointShop = PointShopData(
+        p["points_name"],
+        p["points"],
+      );
+      pointShops.add(pointShop);
+    }
+    print(pointShops.length);
+    return pointShops;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: const Color.fromARGB(255, 255, 126, 45),
+        backgroundColor: Color.fromARGB(255, 240, 240, 240),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: const Color.fromARGB(255, 255, 126, 45),
+            ),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+            },
           ),
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const HomeScreen()));
-          },
-        ),
-        title: Text(
-          'Points Shop',
-          style: TextStyle(
-            color: Color.fromARGB(255, 255, 153, 0),
-            fontFamily: 'Inter-Bold',
-            fontSize: 30,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        toolbarHeight: 150,
-        flexibleSpace: Container(
-          alignment: Alignment.bottomLeft,
-          padding: EdgeInsets.only(left: 70, bottom: 20, top: 20),
-          child: Container(
-            child: Text(
-              'Points: 42,069',
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Inter-Bold',
-                fontSize: 16,
-              ),
+          title: new Text(
+            "Points Shop",
+            style: const TextStyle(
+              fontFamily: 'Inter-bold',
+              color: Colors.black,
             ),
           ),
+          backgroundColor: Color.fromARGB(255, 240, 240, 240),
+          elevation: 0,
         ),
-        elevation: 20,
-      ),
-      backgroundColor: Colors.white,
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-          child: GNav(
-            gap: 8,
-            padding: EdgeInsets.all(15),
-            backgroundColor: Colors.white,
-            color: Color.fromARGB(255, 255, 153, 0),
-            activeColor: Color.fromARGB(255, 255, 153, 0),
-            tabBackgroundColor: Color.fromARGB(69, 255, 153, 0),
-            tabs: const [
-              GButton(icon: Icons.home),
-              GButton(icon: Icons.announcement),
-              GButton(icon: Icons.list),
-              GButton(icon: Icons.notifications),
-              GButton(icon: Icons.person),
-            ],
-          ),
-        ),
-      ),
-    );
+        body: Container(
+            child: FutureBuilder(
+          future: _getPointShop(),
+          builder: (BuildContext context, AsyncSnapshot snapshot3) {
+            if (snapshot3.data == null) {
+              return Container(
+                  child: Center(child: CircularProgressIndicator()));
+            } else {
+              return ListView.builder(
+                itemCount: snapshot3.data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  PointShopData data = snapshot3.data[index];
+                  return Card(
+                    color: Colors.white,
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5,
+                    ),
+                    child: ListTile(
+                      title: Text(
+                        snapshot3.data[index].points_name,
+                        style:
+                            TextStyle(fontFamily: 'Inter-black', fontSize: 18),
+                      ),
+                      subtitle: Text(
+                        snapshot3.data[index].points.toString(),
+                        style: TextStyle(
+                            fontFamily: 'Inter-semibold', fontSize: 12),
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+          },
+        )));
   }
 }

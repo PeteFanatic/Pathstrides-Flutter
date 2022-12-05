@@ -29,19 +29,6 @@ class AnnouncementData {
 }
 
 class _AnnouncementScreenState extends State<AnnouncementScreen> {
-  // var tasks = <TaskInfo>[];
-  // @override
-  // void initState() {
-  //   _getTask();
-  //   super.initState();
-  // }
-
-  // Future _getTask() async {
-  //   CallApi().getEmployeeTaskData('employeeTask').then((response) {
-  //     Iterable list = json.decode(response.body);
-  //     tasks = list.map((model) => TaskInfo.fromJson(model)).toList();
-  //   });
-  // }
   Future<List<AnnouncementData>> _getAnnouncement() async {
     var data2 =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeAnnounce'));
