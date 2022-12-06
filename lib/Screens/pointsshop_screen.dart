@@ -28,7 +28,7 @@ class PointShopData {
 }
 
 class _PointsShopScreenState extends State<PointsShopScreen> {
-  Future<List<PointShopData>> _getPointShop() async {
+  Future<List<PointShopData>> _getRedeemShop() async {
     var data3 =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeePointShop'));
     var jsonData = json.decode(data3.body);
@@ -75,7 +75,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
         ),
         body: Container(
             child: FutureBuilder(
-          future: _getPointShop(),
+          future: _getRedeemShop(),
           builder: (BuildContext context, AsyncSnapshot snapshot3) {
             if (snapshot3.data == null) {
               return Container(

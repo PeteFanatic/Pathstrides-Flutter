@@ -36,7 +36,7 @@ class CallApi {
     }
   }
 
-  getPointShop(apiUrl) async {
+  getRedeemShop(apiUrl) async {
     http.Response response = await http.get(Uri.parse(_url + apiUrl));
     try {
       if (response.statusCode == 200) {
