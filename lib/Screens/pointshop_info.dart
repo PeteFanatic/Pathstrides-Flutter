@@ -29,7 +29,7 @@ class _PointShopInfoState extends State<PointShopInfo> {
       children: [
         Container(
           // height: 220,
-          margin: EdgeInsets.only(left: 25, right: 25),
+          margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: index.isEven

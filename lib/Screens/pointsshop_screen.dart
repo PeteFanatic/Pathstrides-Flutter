@@ -165,104 +165,70 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            child: Container(
-              margin: EdgeInsets.only(top: 45, bottom: 15),
-              padding: EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
+            children: [
+              Column(
                 children: [
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
-                            ),
-                          );
-                        },
-                        child: Icon(
-                          Icons.arrow_back,
-                          size: 30,
-                          color: Color.fromARGB(255, 255, 153, 0),
-                        ),
-                      ),
-                      Text(
-                        "Point Shop",
-                        style: TextStyle(
-                          fontFamily: 'Inter-Bold',
-                          fontSize: 25,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: 45,
-                    height: 45,
-                    child: Icon(
-                      Icons.shopping_bag,
-                      color: Colors.white,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: const Color.fromARGB(255, 255, 126, 45),
+                  HomeAppBar(),
+                  PointShopInfo(),
+                  Text(
+                    "Items",
+                    style: TextStyle(
+                      fontFamily: 'Inter-bold',
+                      fontSize: 20,
                     ),
                   ),
                 ],
               ),
-            ),
-          ),
-          PointShopInfo(),
-          Container(
-            child: FutureBuilder(
-              future: _getRedeemShop(),
-              builder: (BuildContext context, AsyncSnapshot snapshot3) {
-                if (snapshot3.data == null) {
-                  return Container(
-                    child: Center(
-                      // child: CircularProgressIndicator(),
-                      child: Text(
-                        "Nothing to see here...",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 150, 150, 150),
-                          fontSize: 16,
-                          fontFamily: 'Inter',
+              FutureBuilder(
+                future: _getRedeemShop(),
+                builder: (BuildContext context, AsyncSnapshot snapshot3) {
+                  if (snapshot3.data == null) {
+                    return Container(
+                      child: Center(
+                        // child: CircularProgressIndicator(),
+                        child: Text(
+                          "Nothing to see here...",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 150, 150, 150),
+                            fontSize: 16,
+                            fontFamily: 'Inter',
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                } else {
-                  return ListView.builder(
-                    itemCount: snapshot3.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      PointShopData data = snapshot3.data[index];
-                      return Card(
-                        color: Colors.white,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        child: ListTile(
-                          title: Text(
-                            snapshot3.data[index].points_name,
-                            style: TextStyle(
-                              fontFamily: 'Inter-bold',
-                              fontSize: 18,
+                    );
+                  } else {
+                    return ListView.builder(
+                      itemCount: snapshot3.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        PointShopData data = snapshot3.data[index];
+                        return Card(
+                          color: Colors.white,
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          child: ListTile(
+                            title: Text(
+                              snapshot3.data[index].points_name,
+                              style: TextStyle(
+                                fontFamily: 'Inter-bold',
+                                fontSize: 18,
+                              ),
+                            ),
+                            subtitle: Text(
+                              snapshot3.data[index].points.toString(),
+                              style: TextStyle(
+                                fontFamily: 'Inter-semibold',
+                                fontSize: 12,
+                              ),
                             ),
                           ),
-                          subtitle: Text(
-                            snapshot3.data[index].points.toString(),
-                            style: TextStyle(
-                              fontFamily: 'Inter-semibold',
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }
-              },
-            ),
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+            ],
           ),
         ],
       ),
