@@ -51,6 +51,7 @@ dependencies:
   geocoding: ^2.0.5
   url_launcher: ^6.1.6
   easy_geofencing: ^0.2.0
+  badges: ^2.0.3
   
 dev_dependencies:
   flutter_test:
