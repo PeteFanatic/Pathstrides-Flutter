@@ -226,26 +226,27 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
 //                   ),
 //                 ),
 //                 //Items
-//                 FutureBuilder(
-//                   future: _getRedeemShop(),
-//                   builder: (BuildContext context, AsyncSnapshot snapshot3) {
-//                     if (snapshot3.data == null) {
-//                       return Center(
-//                         child: Text("Nothing to see here..."),
-//                       );
-
-                      
-//                     } else {
-//                       GridView.builder(
-//                         gridDelegate:
-//                             const SliverGridDelegateWithFixedCrossAxisCount(
-//                                 crossAxisCount: 2),
-//                         itemBuilder: (BuildContext context, int index) {
-//                           PointShopData data = snapshot3.data[index];
-//                         },
-//                       );
-//                     }
-//                   },
+//                 Container(
+//                   child: FutureBuilder(
+//                     builder: (BuildContext context, AsyncSnapshot snapshot3) {
+//                       if (snapshot3.data == null) {
+//                         return Container(
+//                           child: Center(
+//                             child: Text("Nothing to see here..."),
+//                           ),
+//                         );
+//                       } else {
+//                         GridView.builder(
+//                           gridDelegate:
+//                               const SliverGridDelegateWithFixedCrossAxisCount(
+//                                   crossAxisCount: 2),
+//                           itemBuilder: (BuildContext context, int index) {
+//                             PointShopData data = snapshot3.data[index];
+//                           },
+//                         );
+//                       }
+//                     },
+//                   ),
 //                 ),
 //               ],
 //             ),
