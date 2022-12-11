@@ -163,73 +163,91 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              Column(
-                children: [
-                  HomeAppBar(),
-                  PointShopInfo(),
-                  Text(
-                    "Items",
-                    style: TextStyle(
-                      fontFamily: 'Inter-bold',
-                      fontSize: 23,
-                    ),
+      backgroundColor: Color.fromARGB(255, 252, 252, 252),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100.0), // here the desired height
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            bottom: 10,
+          ),
+          child: AppBar(
+            backgroundColor: Colors.white,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                size: 30,
+                color: const Color.fromARGB(255, 255, 126, 45),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const HomeScreen()));
+              },
+            ),
+            title: new Text(
+              "Points Shop",
+              style: const TextStyle(
+                fontFamily: 'Inter-bold',
+                fontSize: 25,
+                color: Colors.black,
+              ),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.shopping_bag_rounded,
+                    size: 30,
+                    color: const Color.fromARGB(255, 255, 126, 45),
                   ),
-                  FutureBuilder(
-                    future: _getRedeemShop(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot3) {
-                      if (snapshot3.data == null) {
-                        return Center(
-                          // child: CircularProgressIndicator(),
-                          child: Text(
-                            "Nothing to see here...",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 150, 150, 150),
-                              fontSize: 16,
-                              fontFamily: 'Inter',
-                            ),
-                          ),
-                        );
-                      } else {
-                        return ListView.builder(
-                          itemCount: snapshot3.data.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            PointShopData data = snapshot3.data[index];
-                            return Card(
-                              color: Colors.white,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: ListTile(
-                                title: Text(
-                                  snapshot3.data[index].points_name,
-                                  style: TextStyle(
-                                    fontFamily: 'Inter-bold',
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                subtitle: Text(
-                                  snapshot3.data[index].points.toString(),
-                                  style: TextStyle(
-                                    fontFamily: 'Inter-bold',
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      }
-                    },
-                  ),
-                ],
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+                  },
+                ),
               ),
             ],
+            elevation: 0,
           ),
-        ],
+        ),
+      ),
+      body: Container(
+        child: FutureBuilder(
+          future: _getRedeemShop(),
+          builder: (BuildContext context, AsyncSnapshot snapshot3) {
+            if (snapshot3.data == null) {
+              return Container(
+                  child: Center(child: CircularProgressIndicator()));
+            } else {
+              return ListView.builder(
+                itemCount: snapshot3.data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  PointShopData data = snapshot3.data[index];
+                  return Card(
+                    color: Colors.white,
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5,
+                    ),
+                    child: ListTile(
+                      title: Text(
+                        snapshot3.data[index].points_name,
+                        style:
+                            TextStyle(fontFamily: 'Inter-black', fontSize: 18),
+                      ),
+                      subtitle: Text(
+                        snapshot3.data[index].points.toString(),
+                        style: TextStyle(
+                            fontFamily: 'Inter-semibold', fontSize: 12),
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+          },
+        ),
       ),
     );
   }
