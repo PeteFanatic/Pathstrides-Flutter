@@ -164,6 +164,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             children: [
@@ -175,7 +176,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                     "Items",
                     style: TextStyle(
                       fontFamily: 'Inter-bold',
-                      fontSize: 20,
+                      fontSize: 23,
                     ),
                   ),
                 ],
@@ -184,16 +185,14 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                 future: _getRedeemShop(),
                 builder: (BuildContext context, AsyncSnapshot snapshot3) {
                   if (snapshot3.data == null) {
-                    return Container(
-                      child: Center(
-                        // child: CircularProgressIndicator(),
-                        child: Text(
-                          "Nothing to see here...",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 150, 150, 150),
-                            fontSize: 16,
-                            fontFamily: 'Inter',
-                          ),
+                    return Center(
+                      // child: CircularProgressIndicator(),
+                      child: Text(
+                        "Nothing to see here...",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 150, 150, 150),
+                          fontSize: 16,
+                          fontFamily: 'Inter',
                         ),
                       ),
                     );
