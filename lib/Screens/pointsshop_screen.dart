@@ -164,51 +164,79 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 252, 252, 252),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0), // here the desired height
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 10,
-            bottom: 10,
-          ),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                size: 30,
-                color: const Color.fromARGB(255, 255, 126, 45),
-              ),
-              onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const HomeScreen()));
-              },
-            ),
-            title: new Text(
-              "Points Shop",
-              style: const TextStyle(
-                fontFamily: 'Inter-bold',
-                fontSize: 25,
-                color: Colors.black,
-              ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_bag_rounded,
-                    size: 30,
-                    color: const Color.fromARGB(255, 255, 126, 45),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const HomeScreen()));
-                  },
+      appBar: AppBar(
+        toolbarHeight: 120.10, //set your height
+        flexibleSpace: SafeArea(
+          child: Container(
+            padding: EdgeInsets.all(10),
+            color: Colors.white, // set your color
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const HomeScreen(),
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                            color: Color.fromARGB(255, 255, 153, 0),
+                          ),
+                        ),
+                        Text(
+                          "Point Shop",
+                          style: TextStyle(
+                            fontFamily: 'Inter-Black',
+                            fontSize: 25,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      width: 45,
+                      height: 45,
+                      child: Icon(
+                        Icons.shopping_bag,
+                        color: Colors.white,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: const Color.fromARGB(255, 255, 126, 45),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-            elevation: 0,
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 15,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.card_giftcard),
+                      onPressed: () {},
+                      iconSize: 23,
+                    ),
+                    Text(
+                      "420",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'Inter-bold',
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
