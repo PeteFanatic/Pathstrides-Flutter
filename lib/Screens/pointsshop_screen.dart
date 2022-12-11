@@ -123,6 +123,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:pathstrides_mobile/Screens/pointshop_info.dart';
+import 'package:pathstrides_mobile/widgets/bottom_nav_bar.dart';
 //import 'package:pathstrides_mobile/widgets/ItemsWidget.dart';
 
 import '../widgets/HomeAppBar.dart';
@@ -169,7 +170,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
         flexibleSpace: SafeArea(
           child: Container(
             padding: EdgeInsets.all(10),
-            color: Colors.white, // set your color
+            color: Color.fromARGB(255, 246, 246, 246), // set your color
             child: Column(
               children: [
                 Row(
@@ -255,11 +256,11 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 255, 192, 110),
+                Color.fromARGB(255, 255, 203, 135),
                 Color.fromARGB(255, 255, 156, 76),
               ],
               begin: const FractionalOffset(0.0, 0.0),
-              end: const FractionalOffset(1.0, 0.0),
+              end: const FractionalOffset(1.5, 0.0),
               stops: [0.0, 1.0],
               tileMode: TileMode.clamp),
         ),
@@ -303,6 +304,9 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
             }
           },
         ),
+      ),
+      bottomNavigationBar: Container(
+        child: BottomNav(),
       ),
     );
   }
