@@ -179,53 +179,53 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                       fontSize: 23,
                     ),
                   ),
-                ],
-              ),
-              FutureBuilder(
-                future: _getRedeemShop(),
-                builder: (BuildContext context, AsyncSnapshot snapshot3) {
-                  if (snapshot3.data == null) {
-                    return Center(
-                      // child: CircularProgressIndicator(),
-                      child: Text(
-                        "Nothing to see here...",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 150, 150, 150),
-                          fontSize: 16,
-                          fontFamily: 'Inter',
-                        ),
-                      ),
-                    );
-                  } else {
-                    return ListView.builder(
-                      itemCount: snapshot3.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        PointShopData data = snapshot3.data[index];
-                        return Card(
-                          color: Colors.white,
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          child: ListTile(
-                            title: Text(
-                              snapshot3.data[index].points_name,
-                              style: TextStyle(
-                                fontFamily: 'Inter-bold',
-                                fontSize: 18,
-                              ),
-                            ),
-                            subtitle: Text(
-                              snapshot3.data[index].points.toString(),
-                              style: TextStyle(
-                                fontFamily: 'Inter-semibold',
-                                fontSize: 12,
-                              ),
+                  FutureBuilder(
+                    future: _getRedeemShop(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot3) {
+                      if (snapshot3.data == null) {
+                        return Center(
+                          // child: CircularProgressIndicator(),
+                          child: Text(
+                            "Nothing to see here...",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 150, 150, 150),
+                              fontSize: 16,
+                              fontFamily: 'Inter',
                             ),
                           ),
                         );
-                      },
-                    );
-                  }
-                },
+                      } else {
+                        return ListView.builder(
+                          itemCount: snapshot3.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            PointShopData data = snapshot3.data[index];
+                            return Card(
+                              color: Colors.white,
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: ListTile(
+                                title: Text(
+                                  snapshot3.data[index].points_name,
+                                  style: TextStyle(
+                                    fontFamily: 'Inter-bold',
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  snapshot3.data[index].points.toString(),
+                                  style: TextStyle(
+                                    fontFamily: 'Inter-bold',
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
+                ],
               ),
             ],
           ),
