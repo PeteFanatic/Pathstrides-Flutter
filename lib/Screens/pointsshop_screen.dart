@@ -163,7 +163,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 252, 252, 252),
+      // backgroundColor: Color.fromARGB(255, 255, 140, 52),
       appBar: AppBar(
         toolbarHeight: 120.10, //set your height
         flexibleSpace: SafeArea(
@@ -203,9 +203,19 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                     Container(
                       width: 45,
                       height: 45,
-                      child: Icon(
-                        Icons.shopping_bag,
-                        color: Colors.white,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const HomeScreen(),
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          Icons.shopping_bag_rounded,
+                          size: 30,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
@@ -239,8 +249,21 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
             ),
           ),
         ),
+        elevation: 0,
       ),
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 255, 192, 110),
+                Color.fromARGB(255, 255, 156, 76),
+              ],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.0, 0.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp),
+        ),
+        padding: EdgeInsets.only(top: 15),
         child: FutureBuilder(
           future: _getRedeemShop(),
           builder: (BuildContext context, AsyncSnapshot snapshot3) {
@@ -267,7 +290,11 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                       subtitle: Text(
                         snapshot3.data[index].points.toString(),
                         style: TextStyle(
-                            fontFamily: 'Inter-semibold', fontSize: 12),
+                          fontFamily: 'Inter-semibold',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Color.fromARGB(255, 106, 106, 106),
+                        ),
                       ),
                     ),
                   );
