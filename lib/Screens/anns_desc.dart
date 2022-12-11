@@ -11,37 +11,51 @@ class AnnounceDescription extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 240, 240, 240),
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: const Color.fromARGB(255, 255, 126, 45),
+          toolbarHeight: 70.10, //set your height
+          flexibleSpace: SafeArea(
+            child: Container(
+              padding: EdgeInsets.only(
+                top: 10,
+                left: 10,
+              ),
+              color: Color.fromARGB(255, 255, 255, 255), // set your color
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const HomeScreen(),
+                                ),
+                              );
+                            },
+                            child: Icon(
+                              Icons.arrow_back,
+                              size: 30,
+                              color: Color.fromARGB(255, 255, 153, 0),
+                            ),
+                          ),
+                          Text(
+                            "Announcement",
+                            style: TextStyle(
+                              fontFamily: 'Inter-Black',
+                              fontSize: 25,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const AnnouncementScreen()));
-            },
           ),
-          title: Text(
-            announceview.anns_title,
-            style: TextStyle(
-              fontFamily: 'Inter-bold',
-              color: Colors.black,
-            ),
-          ),
-          backgroundColor: Color.fromARGB(255, 240, 240, 240),
           elevation: 0,
-          // iconTheme: IconThemeData(
-          //   color: const Color.fromARGB(255, 255, 126, 45),
-          // ),
-          // actions: [
-          //   IconButton(
-          //     icon: Icon(Icons.person),
-          //     onPressed: () {
-          //       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          //           builder: (context) => const AnnouncementScreen()));
-          //     },
-          //   )
-          // ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

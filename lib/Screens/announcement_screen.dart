@@ -68,7 +68,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
               top: 10,
               left: 10,
             ),
-            color: Color.fromARGB(255, 246, 246, 246), // set your color
+            color: Color.fromARGB(255, 255, 255, 255), // set your color
             child: Column(
               children: [
                 Row(
