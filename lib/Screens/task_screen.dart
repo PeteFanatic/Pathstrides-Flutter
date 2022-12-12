@@ -72,7 +72,7 @@ class _TaskScreenState extends State<TaskScreen> {
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 240, 240, 240),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(
@@ -91,54 +91,66 @@ class _TaskScreenState extends State<TaskScreen> {
               color: Colors.black,
             ),
           ),
-          backgroundColor: Color.fromARGB(255, 240, 240, 240),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           elevation: 0,
         ),
         body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 255, 203, 135),
+                    Color.fromARGB(255, 255, 156, 76),
+                  ],
+                  begin: const FractionalOffset(0.0, 0.0),
+                  end: const FractionalOffset(1.5, 0.0),
+                  stops: [0.0, 1.0],
+                  tileMode: TileMode.clamp),
+            ),
             child: FutureBuilder(
-          future: _getTask(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return Container(
-                  child: Center(child: CircularProgressIndicator()));
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  TaskData data = snapshot.data[index];
-                  return Card(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 5,
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        snapshot.data[index].task_title,
-                        style:
-                            TextStyle(fontFamily: 'Inter-black', fontSize: 18),
-                      ),
-                      subtitle: Text(
-                        snapshot.data[index].address,
-                        style: TextStyle(
-                            fontFamily: 'Inter-semibold', fontSize: 12),
-                      ),
-                      trailing: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: const Color.fromARGB(255, 255, 126, 45),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TaskDescription(data)));
-                      },
-                    ),
+              future: _getTask(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.data == null) {
+                  return Container(
+                      child: Center(child: CircularProgressIndicator()));
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      TaskData data = snapshot.data[index];
+                      return Card(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 5,
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            snapshot.data[index].task_title,
+                            style: TextStyle(
+                                fontFamily: 'Inter-black', fontSize: 18),
+                          ),
+                          subtitle: Text(
+                            snapshot.data[index].address,
+                            style: TextStyle(
+                                fontFamily: 'Inter-semibold', fontSize: 12),
+                          ),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: const Color.fromARGB(255, 255, 126, 45),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        TaskDescription(data)));
+                          },
+                        ),
+                      );
+                    },
                   );
-                },
-              );
-            }
-          },
-        )));
+                }
+              },
+            )));
   }
 }
