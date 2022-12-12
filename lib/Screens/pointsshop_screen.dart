@@ -170,7 +170,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
         flexibleSpace: SafeArea(
           child: Container(
             padding: EdgeInsets.all(10),
-            color: Color.fromARGB(255, 246, 246, 246), // set your color
+            color: Color.fromARGB(255, 255, 255, 255), // set your color
             child: Column(
               children: [
                 Row(

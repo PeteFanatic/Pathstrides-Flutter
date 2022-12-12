@@ -72,30 +72,67 @@ class _TaskScreenState extends State<TaskScreen> {
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 240, 240, 240),
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: const Color.fromARGB(255, 255, 126, 45),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      appBar: AppBar(
+        toolbarHeight: 70.10, //set your height
+        flexibleSpace: SafeArea(
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 10,
+              left: 10,
             ),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
-            },
-          ),
-          title: new Text(
-            "Tasks",
-            style: TextStyle(
-              fontFamily: 'Inter-bold',
-              color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255), // set your color
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const TaskScreen(),
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                            color: Color.fromARGB(255, 255, 153, 0),
+                          ),
+                        ),
+                        Text(
+                          "Tasks",
+                          style: TextStyle(
+                            fontFamily: 'Inter-Black',
+                            fontSize: 25,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          backgroundColor: Color.fromARGB(255, 240, 240, 240),
-          elevation: 0,
         ),
-        body: Container(
-            child: FutureBuilder(
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 255, 203, 135),
+                Color.fromARGB(255, 255, 156, 76),
+              ],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.5, 0.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp),
+        ),
+        child: FutureBuilder(
           future: _getTask(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
@@ -139,6 +176,8 @@ class _TaskScreenState extends State<TaskScreen> {
               );
             }
           },
-        )));
+        ),
+      ),
+    );
   }
 }
