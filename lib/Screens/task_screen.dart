@@ -72,85 +72,112 @@ class _TaskScreenState extends State<TaskScreen> {
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: const Color.fromARGB(255, 255, 126, 45),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      appBar: AppBar(
+        toolbarHeight: 70.10, //set your height
+        flexibleSpace: SafeArea(
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 10,
+              left: 10,
             ),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
-            },
-          ),
-          title: new Text(
-            "Tasks",
-            style: TextStyle(
-              fontFamily: 'Inter-bold',
-              color: Colors.black,
-            ),
-          ),
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
-          elevation: 0,
-        ),
-        body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [
-                    Color.fromARGB(255, 255, 203, 135),
-                    Color.fromARGB(255, 255, 156, 76),
-                  ],
-                  begin: const FractionalOffset(0.0, 0.0),
-                  end: const FractionalOffset(1.5, 0.0),
-                  stops: [0.0, 1.0],
-                  tileMode: TileMode.clamp),
-            ),
-            child: FutureBuilder(
-              future: _getTask(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) {
-                  return Container(
-                      child: Center(child: CircularProgressIndicator()));
-                } else {
-                  return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      TaskData data = snapshot.data[index];
-                      return Card(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 5,
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            snapshot.data[index].task_title,
-                            style: TextStyle(
-                                fontFamily: 'Inter-black', fontSize: 18),
-                          ),
-                          subtitle: Text(
-                            snapshot.data[index].address,
-                            style: TextStyle(
-                                fontFamily: 'Inter-semibold', fontSize: 12),
-                          ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: const Color.fromARGB(255, 255, 126, 45),
-                          ),
+            color: Color.fromARGB(255, 255, 255, 255), // set your color
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        TaskDescription(data)));
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const TaskScreen(),
+                              ),
+                            );
                           },
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                            color: Color.fromARGB(255, 255, 153, 0),
+                          ),
                         ),
-                      );
-                    },
+                        Text(
+                          "Tasks",
+                          style: TextStyle(
+                            fontFamily: 'Inter-Black',
+                            fontSize: 25,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 255, 203, 135),
+                Color.fromARGB(255, 255, 156, 76),
+              ],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.5, 0.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp),
+        ),
+        child: FutureBuilder(
+          future: _getTask(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.data == null) {
+              return Container(
+                  child: Center(child: CircularProgressIndicator()));
+            } else {
+              return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  TaskData data = snapshot.data[index];
+                  return Card(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5,
+                    ),
+                    child: ListTile(
+                      title: Text(
+                        snapshot.data[index].task_title,
+                        style:
+                            TextStyle(fontFamily: 'Inter-black', fontSize: 18),
+                      ),
+                      subtitle: Text(
+                        snapshot.data[index].address,
+                        style: TextStyle(
+                            fontFamily: 'Inter-semibold', fontSize: 12),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: const Color.fromARGB(255, 255, 126, 45),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TaskDescription(data)));
+                      },
+                    ),
                   );
-                }
-              },
-            )));
+                },
+              );
+            }
+          },
+        ),
+      ),
+    );
   }
 }
