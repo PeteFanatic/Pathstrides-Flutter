@@ -75,14 +75,14 @@ class _TaskDescriptionState extends State<TaskDescription> {
                     widget.taskview.address,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        fontSize: 14.0,
+                        fontSize: 15.0,
                         color: Colors.black,
                         fontFamily: 'Inter-semibold'),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                      top: 30.0, left: 0.0, bottom: 5.0, right: 200.0),
+                      top: 10.0, left: 0.0, bottom: 5.0, right: 200.0),
                   child: Text(
                     " Earning points: ${widget.taskview.points} points",
                     style: TextStyle(
@@ -93,9 +93,9 @@ class _TaskDescriptionState extends State<TaskDescription> {
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                      top: 0.0, left: 0.0, bottom: 0.0, right: 200.0),
+                      top: 0.0, left: 0.0, bottom: 0.0, right: 220.0),
                   child: Text(
-                    "Deadline: ${widget.taskview.deadline} points",
+                    "Deadline: ${widget.taskview.deadline}",
                     style: TextStyle(
                         fontSize: 14.0,
                         color: Colors.black,
@@ -105,7 +105,7 @@ class _TaskDescriptionState extends State<TaskDescription> {
                 Container(
                   alignment: Alignment.topLeft,
                   margin: const EdgeInsets.only(
-                      top: 30, left: 10.0, right: 0.0, bottom: 0),
+                      top: 20, left: 20.0, right: 0.0, bottom: 0),
                   child: Text(
                     "Description",
                     textAlign: TextAlign.left,
@@ -148,7 +148,7 @@ class _TaskDescriptionState extends State<TaskDescription> {
                       padding: EdgeInsets.only(
                           top: 0.0, left: 0.0, bottom: 0.0, right: 0.0),
                       minimumSize: const Size(200, 40),
-                      backgroundColor: Color.fromARGB(255, 64, 151, 64),
+                      backgroundColor: Color.fromARGB(255, 255, 153, 0),
                       elevation: 12.0,
                       textStyle: const TextStyle(
                           color: Colors.white,
@@ -190,7 +190,11 @@ class _TaskDescriptionState extends State<TaskDescription> {
                 ),
                 Container(
                     padding: EdgeInsets.only(
-                        top: 10.0, left: 10.0, bottom: 0.0, right: 10.0),
+                      top: 10.0,
+                      left: 10.0,
+                      bottom: 0.0,
+                      right: 10.0,
+                    ),
                     height: 100,
                     width: 380,
                     child: const Card(
@@ -201,11 +205,17 @@ class _TaskDescriptionState extends State<TaskDescription> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.only(
-                              top: 10.0, left: 10.0, bottom: 0.0, right: 0.0),
+                            top: 10.0,
+                            left: 10.0,
+                            bottom: 0.0,
+                            right: 0.0,
+                          ),
                           child: Text(
                             '',
                             style: TextStyle(
-                                fontFamily: 'Inter-regular', fontSize: 14),
+                              fontFamily: 'Inter-regular',
+                              fontSize: 14,
+                            ),
                           ),
                         ))),
                 ElevatedButton(
@@ -221,7 +231,7 @@ class _TaskDescriptionState extends State<TaskDescription> {
                       padding: EdgeInsets.only(
                           top: 0.0, left: 0.0, bottom: 0.0, right: 0.0),
                       minimumSize: const Size(80, 40),
-                      backgroundColor: Color.fromARGB(255, 64, 151, 64),
+                      backgroundColor: Color.fromARGB(255, 255, 153, 0),
                       elevation: 12.0,
                       textStyle: const TextStyle(
                           color: Colors.white,
