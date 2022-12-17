@@ -1,12 +1,12 @@
 class ShopData {
   List<ShopItem> shopitems;
 
-  ShopData({this.shopitems});
+  ShopData({required this.shopitems});
 }
 
 class ShopItem {
   String points_name;
   int points;
 
-  ShopItem({this.points_name, this.points});
+  ShopItem({required this.points_name, required this.points});
 }
