@@ -52,6 +52,7 @@ dependencies:
   url_launcher: ^6.1.6
   easy_geofencing: ^0.2.0
   badges: ^2.0.3
+  get_it: ^7.2.0
   
 dev_dependencies:
   flutter_test:
