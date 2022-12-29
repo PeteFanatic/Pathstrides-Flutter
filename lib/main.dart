@@ -13,6 +13,8 @@ import 'Screens/profile_screen.dart';
 import 'Screens/task_desc.dart';
 import 'Screens/task_screen.dart';
 
+import 'package:get_it/get_it.dart';
+
 void main() {
   runApp(const MyApp());
 }
