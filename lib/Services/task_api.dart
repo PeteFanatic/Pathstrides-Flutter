@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print
 
 import 'package:http/http.dart' as http;
+import 'package:pathstrides_mobile/Services/globals.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,7 +51,7 @@ class CallApi {
     }
   }
 
-  getProfileData(apiUrl) async {
+  getUser(apiUrl) async {
     http.Response response = await http.get(Uri.parse(_url + apiUrl));
     try {
       if (response.statusCode == 200) {
@@ -62,6 +63,26 @@ class CallApi {
       print(e);
       return 'failed';
     }
+  }
+
+  static Future<http.Response> postReport(
+      String image, String reportText) async {
+    Map data = {
+      "image": image,
+      "reportText": reportText,
+    };
+    var body = json.encode(data);
+    // ignore: prefer_interpolation_to_compose_strings
+    var url = Uri.parse(baseURL + 'auth/postReport');
+    http.Response response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    print(response.body);
+
+    return response;
   }
 
   // Future postData(data, apiUrl) async {

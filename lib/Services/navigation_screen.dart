@@ -25,13 +25,14 @@ class NavigationScreen extends StatefulWidget {
 
 class _NavigationScreenState extends State<NavigationScreen> {
   final Completer<GoogleMapController?> _controller = Completer();
+
   Map<PolylineId, Polyline> polylines = {};
   PolylinePoints polylinePoints = PolylinePoints();
   Location location = Location();
   Marker? sourcePosition, destinationPosition;
   loc.LocationData? _currentPosition;
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
-  LatLng curLocation = LatLng(23.0525, 72.5667);
+  LatLng curLocation = LatLng(10.2, 31);
   StreamSubscription<loc.LocationData>? locationSubscription;
 
   @override

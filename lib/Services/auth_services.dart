@@ -11,7 +11,7 @@ class AuthServices {
     Map data = {
       "oldPass": oldPass,
       "newPass": newPass,
-      "confirmPass": confirmPass
+      "confirmPass": confirmPass,
     };
     var body = json.encode(data);
     // ignore: prefer_interpolation_to_compose_strings
@@ -38,13 +38,15 @@ class AuthServices {
       headers: headers,
       body: body,
     );
+
     print(response.body);
+
     return response;
   }
 
   // _getToken() async {
   //   SharedPreferences localStorage = await SharedPreferences.getInstance();
-  //   token = jsonDecode(localStorage.getString('token'))['token'];
+  //   //token = jsonDecode(localStorage.getString('users'))['user_id'];
   // }
 
   // authData(data, apiUrl) async {
@@ -53,9 +55,9 @@ class AuthServices {
   //       body: jsonEncode(data), headers: _setHeaders());
   // }
 
-  _setHeaders() => {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token'
-      };
+  // _setHeaders() => {
+  //       'Content-type': 'application/json',
+  //       'Accept': 'application/json',
+  //       'Authorization': 'Bearer $token'
+  //     };
 }
