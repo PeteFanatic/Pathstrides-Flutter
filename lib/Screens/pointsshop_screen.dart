@@ -289,7 +289,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                             TextStyle(fontFamily: 'Inter-black', fontSize: 18),
                       ),
                       subtitle: Text(
-                        snapshot3.data[index].points.toString(),
+                        '${snapshot3.data[index].points.toString()} Points',
                         style: TextStyle(
                           fontFamily: 'Inter-semibold',
                           fontWeight: FontWeight.bold,

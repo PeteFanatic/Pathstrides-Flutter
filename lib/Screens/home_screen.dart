@@ -78,54 +78,60 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: Icon(
                 Icons.person,
-                color: Color.fromARGB(255, 255, 126, 45),
+                color: Color.fromARGB(255, 240, 240, 240),
               ),
               onPressed: () => Navigator.of(context, rootNavigator: true)
                   .pushReplacement(MaterialPageRoute(
                       builder: (context) => new LoginScreen())),
-            )
-          ],
-          // IconButton(
-          //               padding: EdgeInsets.zero,
-          //               constraints: const BoxConstraints(),
-          //               icon: const Icon(
-          //                 Icons.person,
-          //                 color: Color.fromARGB(255, 255, 126, 45),
-          //               ),
-          //               onPressed: () => Navigator.push(
-          //                   context,
-          //                   MaterialPageRoute(
-          //                       builder: (context) => LoginScreen()))),
-          title: new Text(
-            "Let's get out and work!",
-            style: TextStyle(
-              fontFamily: 'Inter-bold',
-              color: Colors.black,
             ),
-          ),
-          backgroundColor: Colors.white,
+            Container(
+              padding: EdgeInsets.only(
+                  top: 20.0, left: 0.0, bottom: 0.0, right: 260.0),
+              child: new Text(
+                "Welcome, ",
+                style: TextStyle(
+                  fontFamily: 'Inter-medium',
+                  fontSize: 16,
+                  color: Color.fromARGB(255, 240, 240, 240),
+                ),
+              ),
+            ),
+          ],
+          backgroundColor: Color.fromARGB(255, 255, 126, 45),
           elevation: 5,
         ),
         body: SingleChildScrollView(
-          child: Column(
+          child: Stack(
             children: [
               Container(
                 // ignore: prefer_const_constructors
                 padding: EdgeInsets.only(
-                    top: 20.0, left: 0.0, bottom: 0.0, right: 0.0),
+                    top: 20.0, left: 20.0, bottom: 0.0, right: 310.0),
                 child: const Text('Tasks',
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        fontFamily: 'Inter-Bold',
-                        fontSize: 20.0,
-                        letterSpacing: -1.0,
+                        fontFamily: 'Inter-Regular',
+                        fontSize: 18.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.bold)),
+              ),
+              Container(
+                // ignore: prefer_const_constructors
+                padding: EdgeInsets.only(
+                    top: 24.0, left: 334.0, bottom: 0.0, right: 0.0),
+                child: Text('See All',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontFamily: 'Inter-Regular',
+                        fontSize: 12.0,
+                        letterSpacing: 0.0,
                         fontWeight: FontWeight.bold)),
               ),
               Container(
                   margin: EdgeInsets.only(
-                      top: 10.0, left: 0.0, bottom: 0.0, right: 0.0),
-                  height: 300,
-                  width: 800,
+                      top: 60.0, left: 20.0, bottom: 0.0, right: 0.0),
+                  height: 500,
+                  width: 353,
                   child: FutureBuilder(
                     future: _getTask(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -134,43 +140,102 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Center(child: CircularProgressIndicator()));
                       } else {
                         return ListView.builder(
-                          itemCount: snapshot.data.length < 3
-                              ? snapshot.data.length
-                              : 3,
+                          itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
                             TaskData data = snapshot.data[index];
                             TaskData taskview;
-                            return Card(
-                              color: Colors.white,
-                              margin: EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
-                              ),
-                              child: ListTile(
-                                title: Text(
-                                  snapshot.data[index].task_title,
-                                  style: TextStyle(
-                                      fontFamily: 'Inter-black', fontSize: 18),
-                                ),
-                                subtitle: Text(
-                                  snapshot.data[index].address,
-                                  style: TextStyle(
-                                      fontFamily: 'Inter-semibold',
-                                      fontSize: 12),
-                                ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color:
-                                      const Color.fromARGB(255, 255, 126, 45),
-                                ),
+                            return GestureDetector(
                                 onTap: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => TaskScreen()));
                                 },
-                              ),
-                            );
+                                // ignore: unnecessary_new
+                                child: new Container(
+                                  height: 200,
+                                  margin: const EdgeInsets.only(
+                                      top: 0.0,
+                                      left: 0.0,
+                                      bottom: 0.0,
+                                      right: 0.0),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topRight,
+                                      end: Alignment.bottomLeft,
+                                      colors: snapshot.data[index].task_id != 1
+                                          ? [
+                                              Color.fromARGB(255, 196, 35, 35),
+                                              Color.fromARGB(255, 255, 45, 45),
+                                            ]
+                                          : [
+                                              Color.fromARGB(255, 44, 0, 0),
+                                              Color.fromARGB(255, 170, 0, 0),
+                                            ],
+                                    ),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: ListTile(
+                                    title: Container(
+                                      margin: const EdgeInsets.only(
+                                          top: 20.0,
+                                          left: 0.0,
+                                          bottom: 0.0,
+                                          right: 0.0),
+                                      child: Text(
+                                        snapshot.data[index].task_title,
+                                        style: TextStyle(
+                                          fontFamily: 'Inter-black',
+                                          fontSize: 24,
+                                          color:
+                                              snapshot.data[index].task_id == 1
+                                                  ? Color.fromARGB(
+                                                      255, 240, 240, 240)
+                                                  : Color.fromARGB(
+                                                      255, 255, 126, 45),
+                                        ),
+                                      ),
+                                    ),
+                                    subtitle: Container(
+                                        margin: const EdgeInsets.only(
+                                            top: 10.0,
+                                            left: 0.0,
+                                            bottom: 0.0,
+                                            right: 240.0),
+                                        child: Column(children: [
+                                          Text(
+                                            snapshot.data[index].address,
+                                            style: TextStyle(
+                                              fontFamily: 'Inter-regular',
+                                              fontSize: 18,
+                                              color: snapshot.data[index]
+                                                          .task_id ==
+                                                      1
+                                                  ? Color.fromARGB(
+                                                      255, 240, 240, 240)
+                                                  : Color.fromARGB(
+                                                      255, 255, 126, 45),
+                                            ),
+                                          ),
+                                          Text(
+                                            snapshot.data[index].task_desc,
+                                            style: TextStyle(
+                                              fontFamily: 'Inter-regular',
+                                              fontSize: 18,
+                                              color: snapshot.data[index]
+                                                          .task_id ==
+                                                      1
+                                                  ? Color.fromARGB(
+                                                      255, 240, 240, 240)
+                                                  : Color.fromARGB(
+                                                      255, 255, 126, 45),
+                                            ),
+                                          ),
+                                        ])),
+                                    isThreeLine: true,
+                                  ),
+                                ));
                           },
                         );
                       }
@@ -179,20 +244,32 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 // ignore: prefer_const_constructors
                 padding: EdgeInsets.only(
-                    top: 0.0, left: 0.0, bottom: 0.0, right: 0.0),
+                    top: 300.0, left: 20.0, bottom: 0.0, right: 210.0),
                 child: const Text('Announcements',
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        fontFamily: 'Inter-Bold',
-                        fontSize: 20.0,
-                        letterSpacing: -1.0,
+                        fontFamily: 'Inter-Regular',
+                        fontSize: 18.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.bold)),
+              ),
+              Container(
+                // ignore: prefer_const_constructors
+                padding: EdgeInsets.only(
+                    top: 305.0, left: 334.0, bottom: 0.0, right: 0.0),
+                child: Text('See All',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontFamily: 'Inter-Regular',
+                        fontSize: 12.0,
+                        letterSpacing: 0.0,
                         fontWeight: FontWeight.bold)),
               ),
               Container(
                   padding: EdgeInsets.only(
-                      top: 10.0, left: 0.0, bottom: 0.0, right: 0.0),
-                  height: 300,
-                  width: 800,
+                      top: 350.0, left: 20.0, bottom: 0.0, right: 0.0),
+                  height: 800,
+                  width: 373,
                   child: FutureBuilder(
                     future: _getAnnouncement(),
                     builder: (BuildContext context, AsyncSnapshot snapshot2) {
@@ -201,41 +278,83 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Center(child: CircularProgressIndicator()));
                       } else {
                         return ListView.builder(
-                          itemCount: snapshot2.data.length < 3
-                              ? snapshot2.data.length
-                              : 3,
+                          itemCount: snapshot2.data.length,
                           itemBuilder: (BuildContext context, int index) {
                             AnnouncementData data = snapshot2.data[index];
-                            return Card(
-                              color: Colors.white,
-                              margin: EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
-                              ),
-                              child: ListTile(
-                                title: Text(
-                                  snapshot2.data[index].anns_title,
-                                  style: TextStyle(
-                                      fontFamily: 'Inter-black', fontSize: 18),
-                                ),
-                                subtitle: Text(
-                                  snapshot2.data[index].location,
-                                  style: TextStyle(
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AnnouncementScreen()));
+                              },
+                              child: new Container(
+                                height: 200,
+                                margin: const EdgeInsets.only(
+                                    top: 0.0,
+                                    left: 0.0,
+                                    bottom: 0.0,
+                                    right: 0.0),
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topRight,
+                                      end: Alignment.bottomLeft,
+                                      colors: snapshot2.data[index].anns_id == 1
+                                          ? [
+                                              Color.fromARGB(255, 196, 35, 35),
+                                              Color.fromARGB(255, 255, 126, 45),
+                                            ]
+                                          : [
+                                              Color.fromARGB(255, 0, 88, 29),
+                                              Color.fromARGB(255, 0, 151, 50),
+                                            ],
+                                    ),
+                                    color: snapshot2.data[index].anns_id == 1
+                                        ? Colors.red
+                                        : Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: ListTile(
+                                  leading: Text(
+                                    snapshot2.data[index].anns_title,
+                                    style: TextStyle(
+                                      fontFamily: 'Inter-black',
+                                      fontSize: 24,
+                                      color: snapshot2.data[index].anns_id == 1
+                                          ? Color.fromARGB(255, 240, 240, 240)
+                                          : Color.fromARGB(255, 255, 126, 45),
+                                    ),
+                                  ),
+                                  title: Container(
+                                    margin: const EdgeInsets.only(
+                                        top: 0.0,
+                                        left: 0.0,
+                                        bottom: 0.0,
+                                        right: 0.0),
+                                    child: Text(
+                                      snapshot2.data[index].location,
+                                      style: TextStyle(
+                                        fontFamily: 'Inter-semibold',
+                                        fontSize: 12,
+                                        color: snapshot2.data[index].anns_id ==
+                                                1
+                                            ? Color.fromARGB(255, 240, 240, 240)
+                                            : Color.fromARGB(255, 255, 126, 45),
+                                      ),
+                                    ),
+                                  ),
+                                  trailing: Text(
+                                    snapshot2.data[index].anns_desc,
+                                    style: TextStyle(
                                       fontFamily: 'Inter-semibold',
-                                      fontSize: 12),
+                                      fontSize: 12,
+                                      color: snapshot2.data[index].anns_id == 1
+                                          ? Color.fromARGB(255, 240, 240, 240)
+                                          : Color.fromARGB(255, 255, 126, 45),
+                                    ),
+                                  ),
                                 ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color:
-                                      const Color.fromARGB(255, 255, 126, 45),
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              AnnouncementScreen()));
-                                },
                               ),
                             );
                           },

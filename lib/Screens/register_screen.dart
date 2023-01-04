@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Screens/dashboard_screen.dart';
 import 'package:pathstrides_mobile/Services/auth_services.dart';
 import 'package:pathstrides_mobile/Services/globals.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'login_screen.dart';
 import '../rounded_button.dart';
 import 'home_screen.dart';
 import 'login_screen.dart';
@@ -23,26 +24,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _newPass = '';
   String _confirmPass = '';
   bool ishiddenPassword = true;
-  // createAccountPressed() async {
-  //   bool emailValid = RegExp(
-  //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-  //       .hasMatch(_email);
-  //   if (emailValid) {
-  //     http.Response response =
-  //         await AuthServices.register(_password, _email, _password);
-  //     Map responseMap = jsonDecode(response.body);
-  //     if (response.statusCode == 200) {
-  //       Navigator.push(
-  //           context,
-  //           MaterialPageRoute(
-  //             builder: (BuildContext context) => const HomeScreen(),
-  //           ));
-  //     } else {
-  //       errorSnackBar(context, responseMap.values.first[0]);
-  //     }
-  //   } else {
-  //     errorSnackBar(context, 'email not valid');
-  //   }
 
   createAccountPressed() async {
     // bool emailValid = RegExp(
@@ -51,7 +32,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (_oldPass.isNotEmpty && _newPass.isNotEmpty && _confirmPass.isNotEmpty) {
       http.Response response =
           await AuthServices.register(_oldPass, _newPass, _confirmPass);
+      // try {
       Map responseMap = jsonDecode(response.body);
+      //var token = SharedPreferences.getInstance();
       if (response.statusCode == 200) {
         Navigator.push(
             context,
@@ -59,6 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               builder: (BuildContext context) => const DashboardScreen(),
             ));
       } else if (response.statusCode == 400) {
+        //errorSnackBar(context, responseMap.values.first);
         errorSnackBar(context, 'invalid input.');
       }
     } else {

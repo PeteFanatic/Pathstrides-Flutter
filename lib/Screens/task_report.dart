@@ -38,23 +38,6 @@ class _TaskReportState extends State<TaskReport> {
         _image = File(_pickedFile!.path);
       });
     }
-
-    // void submitValues() async {
-    //   Blob blob = new Blob(await _image.readAsBytes());
-    // }
-    // try {
-    //   final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    //   if (image == null) return;
-    //   final imageTemporary = File(image.path);
-    //   if (!mounted) {
-    //     return;
-    //   }
-    //   setState(() {
-    //     _image = imageTemporary;
-    //   });
-    // } catch (error) {
-    //   print("error: $error");
-    // }
   }
 
   @override
@@ -104,33 +87,9 @@ class _TaskReportState extends State<TaskReport> {
                         Center(
                           child: GestureDetector(
                               child: const Text('Select An Image'),
-                              //onPressed: _openImagePicker,
-                              //onTap:()=> Get.find<ImageController>().pickImage(),
                               onTap: () => imageController.pickImage()),
                         ),
                         const SizedBox(height: 35),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(4.0),
-                        //   child: IconButton(
-                        //     icon: Icon(Icons.image),
-                        //     iconSize: 80,
-                        //     color: Color.fromARGB(255, 192, 192, 192),
-                        //     onPressed: () {
-                        //       Navigator.pop(context);
-                        //       choiceImage();
-                        //     },
-                        //   ),
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(0),
-                        //   child: Text(
-                        //     "Insert Image",
-                        //     style: TextStyle(
-                        //         color: Color.fromARGB(255, 173, 173, 173),
-                        //         fontFamily: 'Inter-Medium',
-                        //         fontSize: 18),
-                        //   ),
-                        // ),
                         Container(
                           // ignore: unnecessary_null_comparison
                           alignment: Alignment.center,
