@@ -1,27 +1,29 @@
-class CartUpdate {
+class UpdateCart {
+  int? id;
   int userId;
   DateTime date;
-  List<dynamic> products;
+  List<Map<String, dynamic>> products;
 
-  CartUpdate({
+  UpdateCart({
+    this.id,
     required this.userId,
     required this.date,
     required this.products,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
-      "userId": userId,
-      "date": date == null ? null : date.toIso8601String(),
-      "products": products,
-    };
+  factory UpdateCart.fromJson(Map<String, dynamic> data) {
+    return UpdateCart(
+        id: data['id'],
+        userId: data['userId'],
+        date: data['date'],
+        products: data['products']);
   }
 
-  factory CartUpdate.fromJson(Map<String, dynamic> json) {
-    return CartUpdate(
-      userId: json['userId'],
-      date: DateTime.parse(json['date']),
-      products: json['products'],
-    );
+  Map<String, dynamic> toJson() {
+    return {
+      'userId': userId,
+      'date': date.toIso8601String(),
+      'products': products
+    };
   }
 }

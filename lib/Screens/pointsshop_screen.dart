@@ -127,23 +127,36 @@ import 'package:pathstrides_mobile/widgets/bottom_nav_bar.dart';
 //import 'package:pathstrides_mobile/widgets/ItemsWidget.dart';
 
 import '../widgets/HomeAppBar.dart';
+import 'cart_screen.dart';
 import 'home_screen.dart';
+
+import '../models/product.dart';
+import '../models/cart.dart';
+import '../models/cart_update.dart';
+
+import 'package:get_it/get_it.dart';
+import '../models/product.dart';
+import '../Services/task_api.dart';
 
 class PointsShopScreen extends StatefulWidget {
   const PointsShopScreen({super.key});
 
   @override
   State<PointsShopScreen> createState() => _PointsShopScreenState();
+
+  CallApi get service => GetIt.I<CallApi>();
 }
 
 class PointShopData {
+  CallApi get service => GetIt.I<CallApi>();
   int points;
   String points_name = "";
-
-  PointShopData(this.points_name, this.points);
+  int points_id;
+  PointShopData(this.points_name, this.points, this.points_id);
 }
 
 class _PointsShopScreenState extends State<PointsShopScreen> {
+  CallApi get service => GetIt.I<CallApi>();
   Future<List<PointShopData>> _getRedeemShop() async {
     var data3 =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeePointShop'));
@@ -154,6 +167,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
       PointShopData pointShop = PointShopData(
         p["points_name"],
         p["points"],
+        p["points_id"],
       );
       pointShops.add(pointShop);
     }
@@ -208,7 +222,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
+                              builder: (context) => const CartScreen(),
                             ),
                           );
                         },
@@ -302,12 +316,12 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                         color: const Color.fromARGB(255, 255, 126, 45),
                       ),
                       onTap: () async {
-                        // await updateCart(1, id);
-                        // ScaffoldMessenger.of(context).showSnackBar(
-                        //   const SnackBar(
-                        //     content: Text('Product added to cart'),
-                        //   ),
-                        // );
+                        await service.updateCart(1, points_id);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Product added to cart'),
+                          ),
+                        );
                       },
                     ),
                   );
