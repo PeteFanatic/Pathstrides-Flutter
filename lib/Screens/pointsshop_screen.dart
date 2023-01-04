@@ -297,6 +297,18 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                           color: Color.fromARGB(255, 106, 106, 106),
                         ),
                       ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: const Color.fromARGB(255, 255, 126, 45),
+                      ),
+                      onTap: () async {
+                        // await updateCart(1, id);
+                        // ScaffoldMessenger.of(context).showSnackBar(
+                        //   const SnackBar(
+                        //     content: Text('Product added to cart'),
+                        //   ),
+                        // );
+                      },
                     ),
                   );
                 },
