@@ -149,6 +149,10 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeePointShop'));
     var jsonData = json.decode(data3.body);
 
+    var userpoints =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeUser'));
+    var jsonUserPoints = json.decode(userpoints.body);
+
     List<PointShopData> pointShops = [];
     for (var p in jsonData) {
       PointShopData pointShop = PointShopData(
@@ -215,12 +219,34 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                       onPressed: () {},
                       iconSize: 23,
                     ),
-                    Text(
-                      "420",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Inter-bold',
-                      ),
+                    // Text(
+                    //   "420",
+                    //   style: TextStyle(
+                    //     fontSize: 18,
+                    //     fontFamily: 'Inter-bold',
+                    //   ),
+                    // ),
+                    FutureBuilder(
+                      builder: (BuildContext context, AsyncSnapshot snapshot4) {
+                        if (snapshot4.data == null) {
+                          return Text(
+                            "You currently don't have any points",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                              color: Color.fromARGB(255, 115, 115, 115),
+                            ),
+                          );
+                        } else {
+                          return Text(
+                            snapshot4.data,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Inter-',
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ],
                 ),
