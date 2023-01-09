@@ -201,28 +201,6 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                         ),
                       ],
                     ),
-                    Container(
-                      width: 45,
-                      height: 45,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
-                            ),
-                          );
-                        },
-                        child: Icon(
-                          Icons.shopping_bag_rounded,
-                          size: 30,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: const Color.fromARGB(255, 255, 126, 45),
-                      ),
-                    ),
                   ],
                 ),
                 Row(
@@ -270,7 +248,12 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
           builder: (BuildContext context, AsyncSnapshot snapshot3) {
             if (snapshot3.data == null) {
               return Container(
-                  child: Center(child: CircularProgressIndicator()));
+                child: Center(
+                  child: Text(
+                    'No items to show.',
+                  ),
+                ),
+              );
             } else {
               return ListView.builder(
                 itemCount: snapshot3.data.length,
@@ -297,6 +280,51 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                           color: Color.fromARGB(255, 106, 106, 106),
                         ),
                       ),
+                      onTap: () => showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            "Are you sure you want to purchase this item?",
+                            style: TextStyle(
+                              fontFamily: 'Inter-bold',
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ),
+                          content: Text(
+                            'You are about to purchase ${snapshot3.data[index].points_name.toString()}. This costs ${snapshot3.data[index].points.toString()} points. Are you sure you want to purchase this item?',
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 14,
+                              color: Color.fromARGB(255, 106, 106, 106),
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              child: Text(
+                                "Yes, I'm sure!",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 3, 192, 31),
+                                  fontFamily: 'Inter-bold',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                            TextButton(
+                              child: Text(
+                                "No!",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 0, 0),
+                                  fontFamily: 'Inter-bold',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -311,3 +339,44 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
     );
   }
 }
+
+
+// onPressed: () {
+//                                 showDialog(
+//                                   context: context,
+//                                   builder: (context) => AlertDialog(
+//                                     title: Text(
+//                                       "Are you sure you want to purchase this item?",
+//                                       style: TextStyle(
+//                                         fontFamily: 'Inter-bold',
+//                                         fontSize: 18,
+//                                         color: Color.fromARGB(255, 0, 0, 0),
+//                                       ),
+//                                     ),
+//                                     content: Text(
+//                                       'You are about to purchase ${snapshot3.data[index].points_name.toString()}. Are you sure you want to purchase this item?',
+//                                       style: TextStyle(
+//                                         fontFamily: 'Inter-semibold',
+//                                         fontWeight: FontWeight.bold,
+//                                         fontSize: 16,
+//                                         color:
+//                                             Color.fromARGB(255, 106, 106, 106),
+//                                       ),
+//                                     ),
+//                                     actions: [
+//                                       ElevatedButton(
+//                                         child: Text("Yes I'm sure!"),
+//                                         onPressed: () => Navigator.pop(context),
+//                                         style: ElevatedButton.styleFrom(
+//                                           padding: EdgeInsets.all(10),
+//                                           minimumSize: const Size(50, 40),
+//                                           backgroundColor:
+//                                               Color.fromARGB(255, 255, 153, 0),
+//                                           elevation: 12.0,
+                                          
+//                                         ),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 );
+//                               },
