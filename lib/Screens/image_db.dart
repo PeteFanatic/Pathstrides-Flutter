@@ -1,3 +1,7 @@
+// import 'dart:typed_data';
+// import 'package:http/http.dart' as http;
+// import 'package:pathstrides_mobile/Services/globals.dart';
+
 // class DBHelper {
 //   static Database _db;
 
@@ -16,43 +20,38 @@
 
 //   void _onCreate(Database db, int version) async {
 //     // When creating the db, create the table
-//     await db.execute(
-//         "CREATE TABLE Imagedata(id INTEGER PRIMARY KEY, image TEXT)");
+//     await db
+//         .execute("CREATE TABLE Imagedata(id INTEGER PRIMARY KEY, image TEXT)");
 //     print("Created tables");
 //   }
 
 //   void saveImage(Imagedata imagedata) async {
 //     var dbClient = await db;
 //     await dbClient.transaction((txn) async {
-//       return await txn.rawInsert(
-//           'INSERT INTO Imagedata(id, image) VALUES(' +
-//               '\'' +
-//               imagedata.id+
-//               '\'' +
-//               ',' +
-//               '\'' +
-//               imagedata.image +
-//               '\'' +
-//               ')');
+//       return await txn.rawInsert('INSERT INTO Imagedata(id, image) VALUES(' +
+//           '\'' +
+//           imagedata.id +
+//           '\'' +
+//           ',' +
+//           '\'' +
+//           imagedata.image +
+//           '\'' +
+//           ')');
 //     });
 //   }
 
-//   Future<List<Imagedata>> getMyImage() async {
-//     var dbClient = await db;
-//     List<Map> list = await dbClient.rawQuery('SELECT * FROM Imagedata');
-//     List<Imagedata> images= new List();
-//     for (int i = 0; i < list.length; i++) {
-//       images.add(new Imagedata(list[i]["id"], list[i]["image"]));
-//     }
-//     print(images.length);
-//     return images;
-//   }
-
-//    Future<int> deleteMyImage(Imagedata imagedata) async {
-//     var dbClient = await db;
-
-//     int res =
-//         await dbClient.rawDelete('DELETE * FROM Imagedata');
-//     return res;
+//   Future<APIResponse<Uint8List>> getMyImage(String id) async {
+//     return http
+//         .get(Uri.parse('${baseURL}file/download/$id'), headers: headers)
+//         .then((data) {
+//       if (data.statusCode == 200) {
+//         dynamic blob = data.bodyBytes;
+//         Uint8List image = blob.buffer.asUint8List();
+//         print("FILE $image");
+//         return APIResponse<Uint8List>(
+//           data: image,
+//         );
+//       }
+//     });
 //   }
 // }
