@@ -20,6 +20,31 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
+// class ProfileData {
+//   String user_fname = "";
+//   String user_mname = "";
+//   String user_lname = "";
+//   String user_email = "";
+//   String contactnumber = "";
+//   String user_username = "";
+//   String user_department = "";
+//   String status = "";
+//   //int status;
+//   //int user_id = 0;
+
+//   ProfileData(
+//       this.user_fname,
+//       this.user_mname,
+//       this.user_lname,
+//       this.user_email,
+//       this.contactnumber,
+//       this.user_username,
+//       this.user_department,
+//       this.status
+//       //this.status, this.user_id
+//       );
+// }
+
 class _ProfileScreenState extends State<ProfileScreen> {
   // Future<UserData> _getUser() async {
   //   var data =
@@ -47,38 +72,201 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-    var user = UserData();
+    // var user = UserData();
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 240, 240, 240),
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: const Color.fromARGB(255, 255, 126, 45),
+      appBar: AppBar(
+        toolbarHeight: 70.10, //set your height
+        flexibleSpace: SafeArea(
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 10,
+              left: 10,
             ),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
-            },
-          ),
-          title: new Text(
-            "Profile",
-            style: TextStyle(
-              fontFamily: 'Inter-bold',
-              color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255), // set your color
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const HomeScreen(),
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                            color: Color.fromARGB(255, 255, 153, 0),
+                          ),
+                        ),
+                        Text(
+                          "User Profile",
+                          style: TextStyle(
+                            fontFamily: 'Inter-Black',
+                            fontSize: 25,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          backgroundColor: Color.fromARGB(255, 240, 240, 240),
-          elevation: 0,
         ),
-        body: Container(
-          child: Text(
-            user.user_fname.toString(),
-            style: TextStyle(
-              fontFamily: 'Inter-bold',
-              color: Colors.black,
+        elevation: 0,
+      ),
+      body: Container(
+        padding: EdgeInsets.only(top: 15, left: 15, right: 15),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 255, 157, 59),
+                Color.fromARGB(255, 235, 80, 24),
+              ],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.5, 0.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp),
+        ),
+        child: Column(
+          children: [
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(
+                      bottom: 15,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: new BorderRadius.circular(16.0),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.person_pin_circle_rounded),
+                              onPressed: () {},
+                              iconSize: 150,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Nicki Minaj",
+                              style: TextStyle(
+                                fontFamily: 'Inter-Bold',
+                                fontSize: 30,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        new BorderRadius.circular(16.0),
+                                    color: Colors.green,
+                                  ),
+                                  child: Text(
+                                    "Active",
+                                    style: TextStyle(
+                                      fontFamily: 'Inter-Bold',
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column()
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ));
+            Container(
+              padding: EdgeInsets.only(left: 15, top: 70),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.groups_3_rounded),
+                        onPressed: () {},
+                        iconSize: 30,
+                      ),
+                      Text(
+                        "Marketing",
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.email_rounded),
+                        onPressed: () {},
+                        iconSize: 30,
+                      ),
+                      Text(
+                        "nickiminaj@gmail.com",
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.phone_android_rounded),
+                        onPressed: () {},
+                        iconSize: 30,
+                      ),
+                      Text(
+                        "09123456789",
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
