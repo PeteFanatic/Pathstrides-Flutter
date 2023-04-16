@@ -33,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
           u["task_desc"],
           u["points"],
           u["address"],
-          u["task_lat"],
-          u["task_long"],
+          u["lat"],
+          u["lng"],
           // u["status"],
           u["user_id"],
           u["deadline"]);

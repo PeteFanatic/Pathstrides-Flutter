@@ -159,49 +159,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Nicki Minaj",
-                              style: TextStyle(
-                                fontFamily: 'Inter-Bold',
-                                fontSize: 30,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 10),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        new BorderRadius.circular(16.0),
-                                    color: Colors.green,
-                                  ),
-                                  child: Text(
-                                    "Active",
+                        Container(
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Nicki Minaj",
                                     style: TextStyle(
                                       fontFamily: 'Inter-Bold',
-                                      fontSize: 15,
-                                      color: Colors.white,
+                                      fontSize: 30,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Column()
-                          ],
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 10),
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 4,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              new BorderRadius.circular(16.0),
+                                          color: Colors.green,
+                                        ),
+                                        child: Text(
+                                          "Active",
+                                          style: TextStyle(
+                                            fontFamily: 'Inter-Bold',
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column()
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -210,9 +216,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 15, top: 70),
+              margin: EdgeInsets.only(top: 15),
+              padding: EdgeInsets.only(
+                bottom: 15,
+                left: 10,
+                top: 15,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: new BorderRadius.circular(16.0),
+                color: Colors.white,
+              ),
               child: Column(
                 children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.person_2_rounded),
+                        onPressed: () {},
+                        iconSize: 30,
+                      ),
+                      Text(
+                        "nicki_minaj",
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
                   Row(
                     children: [
                       IconButton(
