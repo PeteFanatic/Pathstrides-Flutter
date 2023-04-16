@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Screens/login_screen.dart';
 import 'package:pathstrides_mobile/Screens/profile_screen.dart';
 import 'package:pathstrides_mobile/Screens/task_desc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'announcement_screen.dart';
 import 'dart:convert';
 
@@ -20,11 +21,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  // void getUser() async {
+  //   var data =
+  //       await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeUser'));
+  //   var jsonData = json.decode(data.body);
+  //   late SharedPreferences preferences;
+  //   preferences = await SharedPreferences.getInstance();
+  // }
+
   Future<List<TaskData>> _getTask() async {
     var data =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeTask'));
     var jsonData = json.decode(data.body);
-
+    late SharedPreferences preferences;
+    preferences = await SharedPreferences.getInstance();
+    int? user_id = preferences.getInt('user_id');
     List<TaskData> tasks = [];
     for (var u in jsonData) {
       TaskData task = TaskData(
@@ -38,7 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
           // u["status"],
           u["user_id"],
           u["deadline"]);
-      tasks.add(task);
+      int temp = u["user_id"];
+      if (temp == user_id) {
+        tasks.add(task);
+      }
     }
     print(tasks.length);
 
@@ -140,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Center(child: CircularProgressIndicator()));
                       } else {
                         return ListView.builder(
-                          itemCount: snapshot.data.length,
+                          itemCount: 1,
                           itemBuilder: (BuildContext context, int index) {
                             TaskData data = snapshot.data[index];
                             TaskData taskview;
@@ -278,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Center(child: CircularProgressIndicator()));
                       } else {
                         return ListView.builder(
-                          itemCount: snapshot2.data.length,
+                          itemCount: 1,
                           itemBuilder: (BuildContext context, int index) {
                             AnnouncementData data = snapshot2.data[index];
                             return GestureDetector(

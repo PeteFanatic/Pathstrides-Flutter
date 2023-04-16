@@ -33,9 +33,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
       http.Response response =
           await AuthServices.register(_oldPass, _newPass, _confirmPass);
       // try {
-      Map responseMap = jsonDecode(response.body);
+      final responseMap = jsonDecode(response.body);
       //var token = SharedPreferences.getInstance();
       if (response.statusCode == 200) {
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        await preferences.setInt('user_id', responseMap['users']['user_id']);
+        await preferences.setInt(
+            'user_points', responseMap['users']['user_points']);
+        await preferences.setString(
+            'user_fname', responseMap['users']['user_fname']);
+        await preferences.setString(
+            'user_mname', responseMap['users']['user_mname']);
+        await preferences.setString(
+            'user_lname', responseMap['users']['user_lname']);
+        await preferences.setString(
+            'user_email', responseMap['users']['user_email']);
+        await preferences.setString(
+            'user_username', responseMap['users']['user_username']);
+        await preferences.setString(
+            'user_department', responseMap['users']['user_department']);
+        await preferences.setString('token', 'token');
+        //await preferences.setStringList('data', responseMap[<String>["users"]]);
         Navigator.push(
             context,
             MaterialPageRoute(

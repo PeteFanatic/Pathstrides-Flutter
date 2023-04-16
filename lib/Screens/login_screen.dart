@@ -27,10 +27,11 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-Future<UserData> _getUser() async {
+Future<UserData> getUser() async {
   var data = await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeUser'));
   var jsonData = json.decode(data.body);
-
+  late SharedPreferences preferences;
+  preferences = await SharedPreferences.getInstance();
   var u = jsonData;
   UserData user = u["user_id"];
   u["user_fname"];
@@ -75,15 +76,29 @@ class _LoginScreenState extends State<LoginScreen> {
   loginPressed() async {
     if (_email.isNotEmpty && _password.isNotEmpty) {
       http.Response response = await AuthServices.login(_email, _password);
-      Map responseMap = jsonDecode(response.body);
+      final responseMap = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
         final loginUser =
             await context.read<UserData>().login(_email, _password);
         if (loginUser != null) {
           SharedPreferences preferences = await SharedPreferences.getInstance();
-          preferences.setString('token', 'loginUser');
-          preferences.setStringList('data', <String>["user"]);
+          await preferences.setInt('user_id', responseMap['users']['user_id']);
+          await preferences.setInt(
+              'user_points', responseMap['users']['user_points']);
+          await preferences.setString(
+              'user_fname', responseMap['users']['user_fname']);
+          await preferences.setString(
+              'user_mname', responseMap['users']['user_mname']);
+          await preferences.setString(
+              'user_lname', responseMap['users']['user_lname']);
+          await preferences.setString(
+              'user_email', responseMap['users']['user_email']);
+          await preferences.setString(
+              'user_username', responseMap['users']['user_username']);
+          await preferences.setString(
+              'user_department', responseMap['users']['user_department']);
+          await preferences.setString('token', 'token');
           return Future.delayed(
               const Duration(seconds: 1),
               () => Navigator.push(

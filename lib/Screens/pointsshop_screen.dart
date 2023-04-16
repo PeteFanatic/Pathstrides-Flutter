@@ -124,6 +124,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:pathstrides_mobile/Screens/pointshop_info.dart';
 import 'package:pathstrides_mobile/widgets/bottom_nav_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:pathstrides_mobile/widgets/ItemsWidget.dart';
 
 import '../widgets/HomeAppBar.dart';
@@ -137,28 +138,36 @@ class PointsShopScreen extends StatefulWidget {
 }
 
 class PointShopData {
-  int points;
+  int points_id;
   String points_name = "";
-
-  PointShopData(this.points_name, this.points);
+  int points;
+  int user_id;
+  PointShopData(this.points_id, this.points_name, this.points, this.user_id);
 }
 
 class _PointsShopScreenState extends State<PointsShopScreen> {
+  late SharedPreferences preferences;
+  void initState() {
+    super.initState;
+    getUserData();
+  }
+
+  void getUserData() async {
+    preferences = await SharedPreferences.getInstance();
+  }
+
   Future<List<PointShopData>> _getRedeemShop() async {
     var data3 =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeePointShop'));
     var jsonData = json.decode(data3.body);
-
-    var userpoints =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeUser'));
-    var jsonUserPoints = json.decode(userpoints.body);
+    late SharedPreferences preferences;
+    preferences = await SharedPreferences.getInstance();
 
     List<PointShopData> pointShops = [];
     for (var p in jsonData) {
       PointShopData pointShop = PointShopData(
-        p["points_name"],
-        p["points"],
-      );
+          p["points_id"], p["points_name"], p["points"], p["user_id"]);
+
       pointShops.add(pointShop);
     }
     print(pointShops.length);
@@ -207,7 +216,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                     ),
                   ],
                 ),
-                Row(
+                Column(
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
@@ -228,7 +237,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                     // ),
                     FutureBuilder(
                       builder: (BuildContext context, AsyncSnapshot snapshot4) {
-                        if (snapshot4.data == null) {
+                        if (preferences == null) {
                           return Text(
                             "You currently don't have any points",
                             style: TextStyle(
@@ -239,9 +248,9 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                           );
                         } else {
                           return Text(
-                            snapshot4.data,
+                            preferences.getInt('user_points').toString(),
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 10,
                               fontFamily: 'Inter-',
                             ),
                           );
@@ -285,6 +294,7 @@ class _PointsShopScreenState extends State<PointsShopScreen> {
                 itemCount: snapshot3.data.length,
                 itemBuilder: (BuildContext context, int index) {
                   PointShopData data = snapshot3.data[index];
+                  PointShopData pointShopview;
                   return Card(
                     color: Colors.white,
                     margin: EdgeInsets.symmetric(

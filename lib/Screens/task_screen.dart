@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:pathstrides_mobile/Screens/task_desc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
 import 'home_screen.dart';
@@ -45,7 +46,9 @@ class _TaskScreenState extends State<TaskScreen> {
     var data =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/employeeTask'));
     var jsonData = json.decode(data.body);
-
+    late SharedPreferences preferences;
+    preferences = await SharedPreferences.getInstance();
+    int? user_id = preferences.getInt('user_id');
     List<TaskData> tasks = [];
     for (var u in jsonData) {
       TaskData task = TaskData(
@@ -54,12 +57,15 @@ class _TaskScreenState extends State<TaskScreen> {
           u["task_desc"],
           u["points"],
           u["address"],
-          u["task_lat"],
-          u["task_long"],
+          u["lat"],
+          u["lng"],
           // u["status"],
           u["user_id"],
           u["deadline"]);
-      tasks.add(task);
+      int temp = u["user_id"];
+      if (temp == user_id) {
+        tasks.add(task);
+      }
     }
     print(tasks.length);
 

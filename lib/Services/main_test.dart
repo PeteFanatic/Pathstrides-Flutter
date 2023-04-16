@@ -8,6 +8,7 @@ main() {
   ));
 }
 
+// 10.2524° N, 123.8392° E - TALISAY COORDINATES (SAMPLE DESTINATION INPUT)
 class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
@@ -20,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter uber'),
+        title: Text('Pathstrides Geolocation temp for phone'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),

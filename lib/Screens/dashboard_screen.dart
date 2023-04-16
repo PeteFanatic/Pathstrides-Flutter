@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pathstrides_mobile/Screens/pointsshop_screen.dart';
 import 'package:pathstrides_mobile/Screens/profile_screen.dart';
 import 'package:pathstrides_mobile/Screens/task_screen.dart';
 import 'package:pathstrides_mobile/Screens/announcement_screen.dart';
@@ -70,7 +71,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           case 3:
             return CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
-                child: NotificationScreen(),
+                child: PointsShopScreen(),
               );
             });
           default:
